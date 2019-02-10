@@ -12,13 +12,7 @@ namespace Checkpoint.Crm.Core
     /// </summary>
     [ServiceContract]
     public interface ILoyaltyService
-    {
-        /// <summary>
-        ///     Возвращает идентификатор системы лояльности
-        /// </summary>
-        /// <returns></returns>
-        string GetLoyaltyServiceId();
-
+    {        
         #region Promo-offers
 
         /// <summary>
@@ -40,25 +34,23 @@ namespace Checkpoint.Crm.Core
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        ApplyPromoOffersResponse PreviewPromoOffers(ApplyPromoOffersRequest request);
-        
-        
+        ApplyPromoOffersResponse PreviewPromoOffers(ApplyPromoOffersRequest request);              
 
         #endregion
 
         #region Points
 
         /// <summary>
-        ///     Списывает баллы со счёта гостя
+        ///     Списывает баллы со счёта гостя по идентификатору карты лояльности или по номеру счёта
         /// </summary>        
         /// <returns></returns>        
-        AccountOperation ChargePoints(ChargePointsRequest request);
+        AccountOperation ChargePoints(ChargePointsRequest request);        
 
         /// <summary>
         /// Удаляет операцию списания баллов
         /// </summary>
         /// <param name="accountOperationId"></param>
-        void ChargePointsDelete(int accountOperationId);
+        void ChargedPointsDelete(int accountOperationId);
 
         #endregion
 

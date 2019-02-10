@@ -1,6 +1,5 @@
 using System;
 using System.Net;
-using System.Threading;
 using System.Web;
 using Checkpoint.Crm.Client.Json;
 using Checkpoint.Crm.Core;
@@ -95,23 +94,14 @@ namespace Checkpoint.Crm.Client
 
         public AccountOperation ChargePoints(ChargePointsRequest request)
         {
-            var req = BuildRequest("account-operations", Method.POST);
-            req.AddBody(new AccountOperation
-            {
-                AccountId = request.AccountId,
-                OrderId = request.OrderId,
-                Credit = request.Amount,
-                Name = request.Name,
-                InitiatorUser = request.InitiatorUser
-            });
-
+            var req = BuildRequest("account-operations/charge/", Method.POST);
+            req.AddBody(request);
             var response = _restClient.Execute<AccountOperation>(req);
             AssertOk(response);
-
             return response.Data;
         }
 
-        public void ChargePointsDelete(int accountOperationId)
+        public void ChargedPointsDelete(int accountOperationId)
         {
             var req = BuildRequest($"account-operations/{accountOperationId}/", Method.DELETE);
             

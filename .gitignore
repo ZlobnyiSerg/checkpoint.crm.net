@@ -3,3 +3,6 @@ obj
 bin
 src/Output
 src/packages
+src/.idea
+*.DotSettings*
+src/.vs
