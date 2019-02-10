@@ -40,20 +40,22 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         /// Пользователь, инициировавший списание баллов
         /// </summary>
-        public string InitiatorUser { get; set; }
+        public string InitiatorUser { get; set; }               
 
-        public ChargePointsRequest(string name, string orderExternalId, int? accountId, decimal amount, string initiatorUser)
+        public ChargePointsRequest(string name, string posCode, string orderExternalId, int? accountId, decimal amount, string initiatorUser)
         {
             Name = name;
+            PosCode = posCode;
             OrderExternalId = orderExternalId;            
             AccountId = accountId;
             Amount = amount;
             InitiatorUser = initiatorUser;
         }
         
-        public ChargePointsRequest(string name, string orderExternalId, string cardNo, decimal amount, string initiatorUser)
+        public ChargePointsRequest(string name, string posCode, string orderExternalId, string cardNo, decimal amount, string initiatorUser)
         {
             Name = name;
+            PosCode = posCode;
             OrderExternalId = orderExternalId;
             CardNo = cardNo;            
             Amount = amount;
