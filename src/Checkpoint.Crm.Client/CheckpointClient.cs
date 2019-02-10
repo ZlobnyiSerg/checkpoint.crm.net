@@ -60,11 +60,6 @@ namespace Checkpoint.Crm.Client
             _restClient.AddHandler("text/json", serializer);
         }
 
-        public string GetLoyaltyServiceId()
-        {
-            return "CHKP";
-        }
-
         public ApplicablePromoOffersResponse GetApplicablePromoOffers(GetApplicablePromoOffersRequest request)
         {
             var req = BuildRequest("offers", Method.POST);
@@ -94,7 +89,7 @@ namespace Checkpoint.Crm.Client
 
         public AccountOperation ChargePoints(ChargePointsRequest request)
         {
-            var req = BuildRequest("account-operations/charge/", Method.POST);
+            var req = BuildRequest("accounts/charge/", Method.POST);
             req.AddBody(request);
             var response = _restClient.Execute<AccountOperation>(req);
             AssertOk(response);
