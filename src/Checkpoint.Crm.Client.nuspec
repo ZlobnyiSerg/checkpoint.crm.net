@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Checkpoint.Crm.Core</id>
+        <title>Checkpoint CRM Core Library</title>
+        <version>1.0.0</version>
+        <authors>Logus HMS</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>DTO for Checkpoint.Crm</description>        
+      <releaseNotes>Initial release</releaseNotes>
+    </metadata>
+    <files>
+        <file src="Output\Checkpoint.Crm.Core.dll" target="lib\net45" />        
+    </files>
+</package>

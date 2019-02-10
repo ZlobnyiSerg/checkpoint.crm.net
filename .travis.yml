@@ -1,0 +1,10 @@
+language: csharp
+solution: src/Checkpoint.Crm.sln
+
+install:
+  - nuget restore src/Checkpoint.Crm.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+
+script:
+  - msbuild /p:Configuration=Release src/Checkpoint.Crm.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./src/Checkpoint.Crm.Tests/bin/Release/Checkpoint.Crm.Tests.dll

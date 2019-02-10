@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D14029D-2343-4A24-A096-51A9342A8FA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Checkpoint.Crm.Core</RootNamespace>
+    <AssemblyName>Checkpoint.Crm.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\ApplicablePromoOffersResponse.cs" />
+    <Compile Include="Commands\ApplyPromoOfferRequest.cs" />
+    <Compile Include="Commands\CardFilter.cs" />
+    <Compile Include="Commands\ChargePointsRequest.cs" />
+    <Compile Include="Commands\CustomerFilter.cs" />
+    <Compile Include="Commands\GetApplicablePromoOffersRequest.cs" />
+    <Compile Include="Commands\LoyalityTransactionRuleDto.cs" />
+    <Compile Include="Commands\OrderFilter.cs" />
+    <Compile Include="Exceptions\LoyaltyException.cs" />
+    <Compile Include="Exceptions\LoyaltyNotFoundException.cs" />
+    <Compile Include="ILoyaltyService.cs" />
+    <Compile Include="Models\Base\DictionaryEntityBaseDto.cs" />
+    <Compile Include="Models\Base\FilterBase.cs" />
+    <Compile Include="Models\Base\ListBase.cs" />
+    <Compile Include="Models\Base\Model.cs" />
+    <Compile Include="Models\Cards\Card.cs" />
+    <Compile Include="Models\Cards\CardList.cs" />
+    <Compile Include="Models\Cards\Tier.cs" />
+    <Compile Include="Models\Cards\TierList.cs" />
+    <Compile Include="Models\Customers\Customer.cs" />
+    <Compile Include="Models\Customers\CustomerList.cs" />
+    <Compile Include="Models\Dictionaries\DocumentType.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Orders\OrderExtraField.cs" />
+    <Compile Include="Models\Orders\OrderItem.cs" />
+    <Compile Include="Models\Orders\OrderList.cs" />
+    <Compile Include="Models\Orders\Payment.cs" />
+    <Compile Include="Models\PromoOffer.cs" />
+    <Compile Include="Models\Shared\Account.cs" />
+    <Compile Include="Models\Shared\AccountOperation.cs" />
+    <Compile Include="Models\Shared\ExtraField.cs" />
+    <Compile Include="Models\Shared\PersonCustomField.cs" />
+    <Compile Include="Models\Shared\Phone.cs" />
+    <Compile Include="Models\Shared\PointOfSale.cs" />
+    <Compile Include="Models\Shared\PointOfSaleFilter.cs" />
+    <Compile Include="Models\Shared\PointOfSaleList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>
