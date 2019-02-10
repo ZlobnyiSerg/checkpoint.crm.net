@@ -23,6 +23,11 @@ namespace Checkpoint.Crm.Core.Commands
         public string PosCode { get; set; }
         
         /// <summary>
+        /// Идентификатор операции списания баллов во внешней системе
+        /// </summary>
+        public string ExternalId { get; set; }
+        
+        /// <summary>
         /// Внешний идентификатор заказа, на котором происходит оплата (для информации)
         /// </summary>
         public string OrderExternalId { get; set; }               
