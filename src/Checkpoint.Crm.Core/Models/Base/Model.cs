@@ -22,7 +22,7 @@ namespace Checkpoint.Crm.Core.Models.Base
         /// <summary>
         ///     Дата создания
         /// </summary>
-        public DateTime ExtDateCreated { get; set; }
+        public DateTime? ExtDateCreated { get; set; }
 
         /// <summary>
         ///     Дата изменения (может быть пустой, если объект не изменялся)
