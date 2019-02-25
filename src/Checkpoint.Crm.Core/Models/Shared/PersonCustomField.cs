@@ -8,7 +8,7 @@
         /// <summary>
         ///     Идентификатор профиля
         /// </summary>
-        public int PersonId { get; private set; }
+        public int PersonId { get; set; }
 
         public PersonCustomField(int personId, string name, string value) : base(name, value)
         {

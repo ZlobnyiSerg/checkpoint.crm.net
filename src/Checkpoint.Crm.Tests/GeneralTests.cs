@@ -24,35 +24,35 @@ namespace Checkpoint.Crm.Tests
             Assert.Greater(res.Count, 0);
         }
 
-        [Test]
-        public void TestPosUpdate()
-        {
-            var cli = new CheckpointClient(Url, Token);
-            var pos = cli.CreateOrUpdatePos(new PointOfSale
-            {
-                Code = "c1",
-                Name = "n1",
-                CurrencyCode = "RUB"
-            });
-            Assert.Greater(pos.Id, 0);
-            /*var pos2 = cli.CreateOrUpdatePos(new PointOfSale
-            {
-                Code = "c1",
-                Name = "n1",
-                CurrencyCode = "RUB"
-            });
-            Assert.AreSame(pos.Id, pos2.Id);*/
-        }
-
+        
         [Test]
         public void TestOrderSearch()
         {
             var cli = new CheckpointClient(Url, Token);
             var orders = cli.FindOrders(new OrderFilter());
             Assert.Greater(orders.Count, 0);
+            Assert.IsNotNull(orders.Results);
+            foreach (var order in orders.Results)
+            {
+                Assert.Greater(order.Id, 0);
+                var ord = cli.GetOrder(order.Id);
+                Assert.IsNotNull(ord);
+            }
+        }
+        
+        [Test]
+        public void TestTiersSearch()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var tiers = cli.GetTiers();
+            Assert.Greater(tiers.Count, 0);
+            foreach (var tier in tiers.Results)
+            {
+                Assert.Greater(tier.Id, 0);
+            }
         }
 
-        [Test]
+        /*[Test]
         public void TestOrderCreation()
         {
             var cli = new CheckpointClient(Url, Token);
@@ -78,7 +78,7 @@ namespace Checkpoint.Crm.Tests
             order = cli.CreateUpdateOrder("c1", order.ExternalId, order);
             
             Assert.Greater(order.Id, 0);
-        }
+        }*/
 
         [Test]
         public void TestArrayDeserialization()

@@ -154,6 +154,14 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        public Order GetOrder(int orderId)
+        {
+            var req = BuildRequest($"orders/{orderId}/", Method.GET);
+            var res = _restClient.Execute<Order>(req);
+            AssertOk(res);
+            return res.Data;
+        }
+        
         public Order GetOrder(string pointOfSaleCode, string externalOrderId)
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.GET);
@@ -191,7 +199,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
-        public TierList GetCardSets()
+        public TierList GetTiers()
         {
             var req = BuildRequest("tiers", Method.GET);
 

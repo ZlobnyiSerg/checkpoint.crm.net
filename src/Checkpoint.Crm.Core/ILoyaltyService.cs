@@ -95,6 +95,13 @@ namespace Checkpoint.Crm.Core
         Order GetOrder(string pointOfSaleCode, string externalOrderId);
 
         /// <summary>
+        /// Возвращает заказ по внутреннему идентификатору
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        Order GetOrder(int orderId);
+
+        /// <summary>
         ///     Осуществляет поиск по визитам гостей
         /// </summary>
         /// <param name="filter"></param>
@@ -126,7 +133,7 @@ namespace Checkpoint.Crm.Core
         ///     Возвращает список наборов карт лояльности
         /// </summary>
         /// <returns></returns>
-        TierList GetCardSets();
+        TierList GetTiers();
 
         /// <summary>
         ///     Возвращает список карт согласно параметрам фильтрации
@@ -153,10 +160,8 @@ namespace Checkpoint.Crm.Core
         /// <summary>
         /// Создаёт или обновляет профиль клиента по уникальным полям, настраиваемым со стороны системы лояльности.
         /// По умолчанию эти поля фамилия+телефон+дата рождения. Если клиент с такой комбинацией полей уже есть, он обновляется.
-        /// Если его нет - создаётся новая запись.
+        /// Если его нет - создаётся новая запись. Если полей недостаточно - возвращается ошибка
         /// </summary>
-        /// <param name="customer"></param>
-        /// <returns></returns>
         Customer CreateUpdateCustomer(Customer customer);
 
         /// <summary>

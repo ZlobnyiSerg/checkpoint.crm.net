@@ -12,12 +12,12 @@ namespace Checkpoint.Crm.Core.Models.Base
         /// <summary>
         ///     Внутреннаяя дата создания в системе лояльности. Для указания внешней даты используйте <see cref="ExtDateCreated"/>.
         /// </summary>
-        public DateTime DateCreated { get; private set; }
+        public DateTime DateCreated { get; set; }
 
         /// <summary>
         ///     Внутреннаяя дата изменения объекта в системе лояльности. Для указания внешней даты используйте <see cref="ExtDateModified"/>.
         /// </summary>
-        public DateTime? DateModified { get; private set; }               
+        public DateTime? DateModified { get; set; }               
     }
 
     public class ExternallyIdentifiedModel : Model
