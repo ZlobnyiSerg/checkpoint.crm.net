@@ -17,7 +17,15 @@ namespace Checkpoint.Crm.Core.Models.Base
         /// <summary>
         ///     Внутреннаяя дата изменения объекта в системе лояльности. Для указания внешней даты используйте <see cref="ExtDateModified"/>.
         /// </summary>
-        public DateTime? DateModified { get; }
+        public DateTime? DateModified { get; }               
+    }
+
+    public class ExternallyIdentifiedModel : Model
+    {
+        /// <summary>
+        ///     Внешний идентификатор
+        /// </summary>
+        public string ExternalId { get; set; }
         
         /// <summary>
         ///     Дата создания

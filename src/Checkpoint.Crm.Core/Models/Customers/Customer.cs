@@ -11,13 +11,8 @@ namespace Checkpoint.Crm.Core.Models.Customers
     /// <summary>
     ///     Клиент
     /// </summary>
-    public class Customer : Model
-    {
-        /// <summary>
-        /// Идентификатор во внешней системе
-        /// </summary>
-        public string ExternalId { get; set; }
-        
+    public class Customer : ExternallyIdentifiedModel
+    {        
         /// <summary>
         ///     Имя
         /// </summary>

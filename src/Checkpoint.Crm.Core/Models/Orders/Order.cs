@@ -8,13 +8,8 @@ namespace Checkpoint.Crm.Core.Models.Orders
     /// <summary>
     ///     Заказ гостя
     /// </summary>
-    public class Order : Model
+    public class Order : ExternallyIdentifiedModel
     {
-        /// <summary>
-        ///     Идентификатор во внешней системе
-        /// </summary>
-        public string ExternalId { get; set; }
-
         /// <summary>
         ///     Клиент
         /// </summary>

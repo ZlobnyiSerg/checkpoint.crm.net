@@ -7,13 +7,8 @@ namespace Checkpoint.Crm.Core.Models.Orders
     /// <summary>
     ///     Факт оказания услуги
     /// </summary>
-    public class OrderItem : Model
+    public class OrderItem : ExternallyIdentifiedModel
     {
-        /// <summary>
-        ///     Идентификтор транзакции в POS
-        /// </summary>
-        public string ExternalId { get; set; }
-
         /// <summary>
         ///     Дата и время услуги
         /// </summary>
@@ -72,12 +67,12 @@ namespace Checkpoint.Crm.Core.Models.Orders
         ///     Признак, что транзакция ещё не проведена, а лишь запланирована
         /// </summary>
         public bool IsScheduled { get; set; }
-        
+
         /// <summary>
         ///     Группа (для объединения с оплатами)
         /// </summary>
         public string GroupId { get; set; }
-        
+
         /// <summary>
         ///     Лимит оплаты бонусными баллами.
         /// </summary>

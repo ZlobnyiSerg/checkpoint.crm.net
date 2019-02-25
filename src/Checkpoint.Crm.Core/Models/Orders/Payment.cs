@@ -6,13 +6,8 @@ namespace Checkpoint.Crm.Core.Models.Orders
     /// <summary>
     ///     Оплата
     /// </summary>
-    public class Payment : Model
+    public class Payment : ExternallyIdentifiedModel
     {
-        /// <summary>
-        ///     Идентификатор в клиентской системе
-        /// </summary>
-        public string ExternalId { get; set; }
-
         /// <summary>
         ///     Дата и время оплаты
         /// </summary>
