@@ -13,11 +13,12 @@ namespace Checkpoint.Crm.Tests
     public class GeneralTests
     {
         private static string Url = "http://crm-dev.logus.pro/api";
-        private static string Token = "";
+        private static string Token = "aa4484f071e2b0765812527fd1caab849c968c99";
 
         [Test]
         public void TestConnection()
         {
+            Assert.IsNotNull(Token, "Token is undefined!");
             var cli = new CheckpointClient(Url, Token);
             var res = cli.FindPointOfSales(new PointOfSaleFilter());
             Assert.Greater(res.Count, 0);
@@ -34,6 +35,13 @@ namespace Checkpoint.Crm.Tests
                 CurrencyCode = "RUB"
             });
             Assert.Greater(pos.Id, 0);
+            /*var pos2 = cli.CreateOrUpdatePos(new PointOfSale
+            {
+                Code = "c1",
+                Name = "n1",
+                CurrencyCode = "RUB"
+            });
+            Assert.AreSame(pos.Id, pos2.Id);*/
         }
 
         [Test]
@@ -48,22 +56,23 @@ namespace Checkpoint.Crm.Tests
         public void TestOrderCreation()
         {
             var cli = new CheckpointClient(Url, Token);
-            var customer = new Customer
-            {
-                ExternalId = Guid.NewGuid().ToString(),
-                FirstName = "Serg",
-                LastName = "Zhi",
-                Email = "test123425@gmail.com"
-            };
-            customer = cli.CreateUpdateCustomer(customer);
+                        
             
             var order = new Order
-            {                
+            {                                
                 ExternalId = Guid.NewGuid().ToString(),
                 DateStart = DateTime.Today.AddDays(-1),
                 DateEnd = DateTime.Today,
                 Name = "test1",
-                CustomerId = customer.Id
+                Customer = new Customer
+                {
+                    ExternalId = Guid.NewGuid().ToString(),
+                    FirstName = "Serg",
+                    LastName = "Zhi",
+                    Email = "test123425@gmail.com",
+                    Phone = "+7999112233",
+                    BirthDate = DateTime.Today.AddYears(-12)
+                }
             };
             
             order = cli.CreateUpdateOrder("c1", order.ExternalId, order);

@@ -34,11 +34,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         ///     Точка продаж, где осуществлён заказ
         /// </summary>
         public int? PointOfSaleId { get; set; }
-
-        /// <summary>
-        ///     Код точки продажи. Может использоваться при операциях вставки/обновления для идентификации заказа по POS и ConsumerId
-        /// </summary>
-        public string PosCode { get; set; }
+        
 
         #region Marketing data
 

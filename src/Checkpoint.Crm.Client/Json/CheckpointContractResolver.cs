@@ -14,6 +14,17 @@ namespace Checkpoint.Crm.Client.Json
         {
             var property = base.CreateProperty(member, memberSerialization);
             property.PropertyName = ConvertPropertyName(property.PropertyName);
+            
+            if (!property.Writable)
+            {
+                var prop = member as PropertyInfo;
+                if (prop != null)
+                {
+                    var hasPrivateSetter = prop.GetSetMethod(true) != null;
+                    property.Writable = hasPrivateSetter;
+                }
+            }
+            
             return property;
         }
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
