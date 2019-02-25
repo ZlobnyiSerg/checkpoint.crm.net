@@ -97,6 +97,24 @@ namespace Checkpoint.Crm.Client
             return response.Data;
         }
 
+        public AccountOperationList FindAccountOperations(AccountOperationFilter filter)
+        {
+            var req = BuildRequest("account-operations", Method.GET, filter);
+
+            if (!string.IsNullOrEmpty(filter.PointOfSaleCode))
+                req.AddQueryParameter("point_of_sale__code", filter.PointOfSaleCode);
+
+            if (!string.IsNullOrEmpty(filter.ExternalId))
+                req.AddQueryParameter("external_id", filter.ExternalId);
+
+            if (filter.AccountId != null)
+                req.AddQueryParameter("account_id", filter.AccountId.Value.ToString());
+
+            var res = _restClient.Execute<AccountOperationList>(req);
+            AssertOk(res);
+            return res.Data;
+        }
+
         public void ChargedPointsDelete(int accountOperationId)
         {
             var req = BuildRequest($"account-operations/{accountOperationId}/", Method.DELETE);

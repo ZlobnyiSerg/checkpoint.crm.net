@@ -44,7 +44,12 @@ namespace Checkpoint.Crm.Core
         ///     Списывает баллы со счёта гостя по идентификатору карты лояльности или по номеру счёта
         /// </summary>        
         /// <returns></returns>        
-        AccountOperation ChargePoints(ChargePointsRequest request);        
+        AccountOperation ChargePoints(ChargePointsRequest request);
+
+        /// <summary>
+        /// Найти операции с бонусным счётом по фильтру
+        /// </summary>
+        AccountOperationList FindAccountOperations(AccountOperationFilter filter);
 
         /// <summary>
         /// Удаляет операцию списания баллов

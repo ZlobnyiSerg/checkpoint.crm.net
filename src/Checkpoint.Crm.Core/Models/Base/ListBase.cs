@@ -12,21 +12,21 @@ namespace Checkpoint.Crm.Core.Models.Base
         /// <summary>
         ///     Указывает общее число записей, удовлетворяющих условиям фильтра
         /// </summary>
-        public int Count { get; set; }
+        public int Count { get; }
 
         /// <summary>
         /// Ссылка на метод для получения предыдущей страницы результатов
         /// </summary>
-        public string Next { get; set; }
+        public string Next { get; }
 
         /// <summary>
         /// Ссылка на метод для получения следующей страницы результатов
         /// </summary>
-        public string Previous { get; set; }
+        public string Previous { get; }
 
         /// <summary>
         ///     Список сущностей
         /// </summary>
-        public T[] Results { get; set; }
+        public T[] Results { get; }
     }
 }

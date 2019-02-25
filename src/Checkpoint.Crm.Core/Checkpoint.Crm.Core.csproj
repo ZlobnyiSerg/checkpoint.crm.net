@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AccountOperationFilter.cs" />
     <Compile Include="Commands\ApplicablePromoOffersResponse.cs" />
     <Compile Include="Commands\ApplyPromoOfferRequest.cs" />
     <Compile Include="Commands\CardFilter.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Models\PromoOffer.cs" />
     <Compile Include="Models\Shared\Account.cs" />
     <Compile Include="Models\Shared\AccountOperation.cs" />
+    <Compile Include="Models\Shared\AccountOperationList.cs" />
     <Compile Include="Models\Shared\ExtraField.cs" />
     <Compile Include="Models\Shared\PersonCustomField.cs" />
     <Compile Include="Models\Shared\Phone.cs" />
