@@ -40,7 +40,7 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         /// Заметки (комментарий)
         /// </summary>
-        public decimal Notes { get; set; }
+        public string Notes { get; set; }
         
         /// <summary>
         /// Пользователь, инициировавший списание баллов
