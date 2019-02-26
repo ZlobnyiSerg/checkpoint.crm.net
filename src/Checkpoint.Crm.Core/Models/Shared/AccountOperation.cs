@@ -24,6 +24,11 @@ namespace Checkpoint.Crm.Core.Models.Shared
         public string Name { get; set; }
         
         /// <summary>
+        /// Заметки к операции списания
+        /// </summary>
+        public string Notes { get; set; }
+        
+        /// <summary>
         /// Сумма, если это начисление баллов
         /// </summary>
         public decimal Debit { get; set; }

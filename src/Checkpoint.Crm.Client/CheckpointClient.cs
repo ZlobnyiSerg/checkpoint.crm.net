@@ -198,6 +198,12 @@ namespace Checkpoint.Crm.Client
             AssertOk(res);
             return res.Data;
         }
+        public void DeleteOrder(int orderId)
+        {
+            var req = BuildRequest($"orders/{orderId}/", Method.DELETE);                        
+            var res = _restClient.Execute<Order>(req);
+            AssertOk(res);            
+        }
 
         public TierList GetTiers()
         {
@@ -314,6 +320,6 @@ namespace Checkpoint.Crm.Client
                 throw new LoyaltyException("Error processing request, status is: " + response.StatusCode);
         }
 
-        #endregion
+        #endregion        
     }
 }

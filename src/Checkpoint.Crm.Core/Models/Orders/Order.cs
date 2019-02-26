@@ -31,9 +31,14 @@ namespace Checkpoint.Crm.Core.Models.Orders
         public string PromoCode { get; set; }
 
         /// <summary>
-        ///     Точка продаж, где осуществлён заказ
+        ///     Точка продаж, где осуществлён заказ. Альтернативой данному полю является использование кода точки продаж <see cref="PosCode"/>
         /// </summary>
         public int? PointOfSaleId { get; set; }
+        
+        /// <summary>
+        ///     Код точки продажи. Может использоваться при операциях вставки/обновления для идентификации заказа по POS и <see cref="ExternalId"/>. Является альтернативой полю идентификатора точки <see cref="PointOfSaleId"/>
+        /// </summary>
+        public string PosCode { get; set; }
         
 
         #region Marketing data

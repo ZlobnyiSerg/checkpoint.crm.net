@@ -13,7 +13,7 @@ namespace Checkpoint.Crm.Tests
     public class GeneralTests
     {
         private static string Url = "http://crm-dev.logus.pro/api";
-        private static string Token = "aa4484f071e2b0765812527fd1caab849c968c99";
+        private static string Token = Environment.GetEnvironmentVariable("CheckpointToken");
 
         [Test]
         public void TestConnection()
@@ -24,7 +24,7 @@ namespace Checkpoint.Crm.Tests
             Assert.Greater(res.Count, 0);
         }
 
-        
+
         [Test]
         public void TestOrderSearch()
         {
@@ -39,7 +39,7 @@ namespace Checkpoint.Crm.Tests
                 Assert.IsNotNull(ord);
             }
         }
-        
+
         [Test]
         public void TestTiersSearch()
         {
@@ -50,6 +50,45 @@ namespace Checkpoint.Crm.Tests
             {
                 Assert.Greater(tier.Id, 0);
             }
+        }
+
+        [Test]
+        public void TestCustomerAndAccountOperations()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            
+            var order = new Order
+            {                                
+                ExternalId = Guid.NewGuid().ToString(),
+                DateStart = DateTime.Today.AddDays(-1),
+                DateEnd = DateTime.Today,
+                Name = "Reservation",
+                Customer = new Customer
+                {
+                    ExternalId = Guid.NewGuid().ToString(),
+                    FirstName = "Serg",
+                    LastName = "Zhi",
+                    Email = "test1234256@gmail.com",
+                    Phone = "+7999112244",
+                    BirthDate = new DateTime(1981, 12, 11)
+                }
+            };
+            
+            order = cli.CreateUpdateOrder("MAIN", order.ExternalId, order);
+            
+            var customers = cli.FindCustomers(new CustomerFilter());
+            Assert.Greater(customers.Count, 0);
+            var customer = cli.GetCustomer(customers.Results[0].Id);
+            Assert.IsNotNull(customer.Cards);
+            Assert.Greater(customer.Cards.Length, 0);
+            var card = customer.Cards[0];
+            var pointOperation = cli.ChargePoints(new ChargePointsRequest("Points test", "MAIN", order.ExternalId, card.Account.Id, 10, "test user"));
+            Assert.IsNotNull(pointOperation);
+            Assert.Greater(pointOperation.Id, 0);
+            
+            cli.ChargedPointsDelete(pointOperation.Id);
+
+            cli.DeleteOrder(order.Id);
         }
 
         /*[Test]

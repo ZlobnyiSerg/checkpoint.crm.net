@@ -125,6 +125,11 @@ namespace Checkpoint.Crm.Core
         /// <returns></returns>
         OrderExtraField GetOrderExtraField(int orderId, string fieldName);
 
+        /// <summary>
+        /// Удаляет заказ
+        /// </summary>        
+        void DeleteOrder(int orderId);
+
         #endregion
 
         #region Loyalty Cards
