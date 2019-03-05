@@ -28,9 +28,8 @@ namespace Checkpoint.Crm.Client
                     c.RuleFor(ct => ct.DocIssueDate).Converter(new DateFormatter());
                     c.RuleFor(ct => ct.DocExpirationDate).Converter(new DateFormatter());
                 }),
-            NullValueHandling = NullValueHandling.Ignore,
-            DefaultValueHandling = DefaultValueHandling.Ignore,
-            Formatting = Formatting.Indented,
+            NullValueHandling = NullValueHandling.Ignore,            
+            Formatting = Formatting.None,
             Converters =
             {
                 new StringEnumConverter()
