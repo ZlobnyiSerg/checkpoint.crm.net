@@ -12,12 +12,22 @@ namespace Checkpoint.Crm.Core.Models.Orders
         ///     Дата и время оплаты
         /// </summary>
         public DateTime Date { get; set; }
+        
+        /// <summary>
+        /// Внешний идентификатор оплаты
+        /// </summary>
+        public string ExternalId { get; set; }
 
         /// <summary>
         ///     Способ оплаты (наличные, кредитки и т.п.)
         /// </summary>
         public PaymentType Type { get; set; }
 
+        /// <summary>
+        ///     Код способа оплаты
+        /// </summary>
+        public string Code { get; set; }
+        
         /// <summary>
         ///     Наименование оплаты
         /// </summary>
@@ -45,7 +55,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         public string CardIssuer { get; set; }
         
         /// <summary>
-        ///     Группа (для объединения с оплатами)
+        ///     Группа (идентификатор чека, для объединения с услугами и товарами)
         /// </summary>
         public string GroupId { get; set; }
     }
