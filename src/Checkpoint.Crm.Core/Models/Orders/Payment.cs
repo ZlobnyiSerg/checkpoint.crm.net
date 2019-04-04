@@ -11,12 +11,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         /// <summary>
         ///     Дата и время оплаты
         /// </summary>
-        public DateTime Date { get; set; }
-        
-        /// <summary>
-        /// Внешний идентификатор оплаты
-        /// </summary>
-        public string ExternalId { get; set; }
+        public DateTime Date { get; set; }               
 
         /// <summary>
         ///     Способ оплаты (наличные, кредитки и т.п.)
