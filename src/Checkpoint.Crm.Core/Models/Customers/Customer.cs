@@ -80,9 +80,14 @@ namespace Checkpoint.Crm.Core.Models.Customers
         public string MergedTo { get; set; }
         
         /// <summary>
-        ///     Карты, привязанные к гостю
+        /// Карты, привязанные к клиенту
         /// </summary>
         public Card[] Cards { get; set; }
+        
+        /// <summary>
+        /// Предпочтения клиента
+        /// </summary>
+        public CustomerPreference[] Preferences { get; set; }
 
         #region Address
         /// <summary>

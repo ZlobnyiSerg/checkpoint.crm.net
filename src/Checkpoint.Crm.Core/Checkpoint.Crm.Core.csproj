@@ -62,7 +62,9 @@
     <Compile Include="Models\Cards\TierList.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Customers\CustomerList.cs" />
+    <Compile Include="Models\Customers\CustomerPreference.cs" />
     <Compile Include="Models\Dictionaries\DocumentType.cs" />
+    <Compile Include="Models\Dictionaries\PreferenceCategory.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderExtraField.cs" />
     <Compile Include="Models\Orders\OrderItem.cs" />
