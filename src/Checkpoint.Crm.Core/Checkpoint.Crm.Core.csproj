@@ -51,6 +51,7 @@
     <Compile Include="Commands\OrderFilter.cs" />
     <Compile Include="Exceptions\LoyaltyException.cs" />
     <Compile Include="Exceptions\LoyaltyNotFoundException.cs" />
+    <Compile Include="Exceptions\LoyaltyValidationException.cs" />
     <Compile Include="ILoyaltyService.cs" />
     <Compile Include="Models\Base\DictionaryEntityBaseDto.cs" />
     <Compile Include="Models\Base\FilterBase.cs" />

@@ -13,6 +13,7 @@ using Checkpoint.Crm.Core.Models.Shared;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RestSharp;
+using RestSharp.Extensions;
 using RestRequest = RestSharp.RestRequest;
 
 namespace Checkpoint.Crm.Client
@@ -306,7 +307,7 @@ namespace Checkpoint.Crm.Client
         private void AssertOk(IRestResponse response)
         {
             if (response.StatusCode == HttpStatusCode.BadRequest)
-                throw new LoyaltyException("Bad request: " + response.Content);
+                throw new LoyaltyValidationException("Bad request: " + response.Content);
             if (response.StatusCode == HttpStatusCode.NotFound)
                 throw new LoyaltyNotFoundException("Not found: " + response.ResponseUri);
             if (response.StatusCode == HttpStatusCode.InternalServerError)
