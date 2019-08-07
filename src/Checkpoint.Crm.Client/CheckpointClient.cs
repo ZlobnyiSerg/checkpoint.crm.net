@@ -313,7 +313,7 @@ namespace Checkpoint.Crm.Client
             if (response.StatusCode == HttpStatusCode.InternalServerError)
                 throw new LoyaltyException("Internal server error: " + response.Content);
             if (response.ErrorException != null)
-                throw new LoyaltyException("Error processing loyalty request", response.ErrorException);
+                throw new LoyaltyException(response.ErrorException.Message, response.ErrorException);
             if (response.StatusCode != HttpStatusCode.Created
                 && response.StatusCode != HttpStatusCode.OK
                 && response.StatusCode != HttpStatusCode.NoContent)
