@@ -39,6 +39,34 @@ namespace Checkpoint.Crm.Tests
                 Assert.IsNotNull(ord);
             }
         }
+        
+        [Test]
+        public void TestPricePrecision()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var res = cli.PreviewPromoOffers(new ApplyPromoOffersRequest
+            {
+                Order = new Order
+                {
+                    PosCode = "MAIN",
+                    Name = "order1",
+                    ExternalId = "1",
+                    DateStart = DateTime.Today,
+                    DateEnd = null,
+                    Items = new []
+                    {
+                        new OrderItem
+                        {
+                            Date = DateTime.Today,
+                            Code="123",
+                            Name="Text",
+                            Amount = 10,
+                            AmountBeforeDiscount = 10.123456m
+                        }
+                    }
+                }
+            });
+        }
 
         [Test]
         public void TestTiersSearch()

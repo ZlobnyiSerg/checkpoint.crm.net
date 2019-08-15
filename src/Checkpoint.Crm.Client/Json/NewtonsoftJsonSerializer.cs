@@ -2,7 +2,9 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using Checkpoint.Crm.Core.Models.Customers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using RestSharp;
 using RestSharp.Deserializers;
 using RestSharp.Serializers;
@@ -11,8 +13,23 @@ namespace Checkpoint.Crm.Client.Json
 {
     public class NewtonsoftJsonSerializer : ISerializer, IDeserializer
     {
-        private static readonly Lazy<NewtonsoftJsonSerializer> _default = new Lazy<NewtonsoftJsonSerializer>(LazyThreadSafetyMode.PublicationOnly);
-        private readonly Newtonsoft.Json.JsonSerializer _serializer;      
+        private static readonly Newtonsoft.Json.JsonSerializer _serializer = new Newtonsoft.Json.JsonSerializer
+        {
+            ContractResolver = new CheckpointContractResolver()
+                .AddSettings<Customer>(c =>
+                {
+                    c.RuleFor(ct => ct.BirthDate).Converter(new DateFormatter());
+                    c.RuleFor(ct => ct.DocIssueDate).Converter(new DateFormatter());
+                    c.RuleFor(ct => ct.DocExpirationDate).Converter(new DateFormatter());
+                }),
+            NullValueHandling = NullValueHandling.Ignore,            
+            Formatting = Formatting.Indented,
+            Converters =
+            {
+                new StringEnumConverter(),
+                new DecimalJsonConverter()
+            }
+        };      
 
         public string DateFormat { get; set; }        
 
@@ -25,25 +42,6 @@ namespace Checkpoint.Crm.Client.Json
         public NewtonsoftJsonSerializer()
         {
             ContentType = "application/json";
-            _serializer = new Newtonsoft.Json.JsonSerializer
-            {
-                MissingMemberHandling = MissingMemberHandling.Ignore,
-                NullValueHandling = NullValueHandling.Include,
-                DefaultValueHandling = DefaultValueHandling.Include,
-                Culture = new CultureInfo(string.Empty)
-                {
-                    NumberFormat = new NumberFormatInfo()
-                    {
-                        CurrencyDecimalDigits = 5
-                    }
-                }
-            };
-        }
-
-        public NewtonsoftJsonSerializer(Newtonsoft.Json.JsonSerializer serializer)
-        {
-            ContentType = "application/json";
-            _serializer = serializer;
         }
 
         public string Serialize(object obj)

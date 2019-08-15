@@ -20,27 +20,11 @@ namespace Checkpoint.Crm.Client
 {
     public class CheckpointClient : ILoyaltyService
     {
-        private static readonly JsonSerializer JsonSerializer = new JsonSerializer
-        {
-            ContractResolver = new CheckpointContractResolver()
-                .AddSettings<Customer>(c =>
-                {
-                    c.RuleFor(ct => ct.BirthDate).Converter(new DateFormatter());
-                    c.RuleFor(ct => ct.DocIssueDate).Converter(new DateFormatter());
-                    c.RuleFor(ct => ct.DocExpirationDate).Converter(new DateFormatter());
-                }),
-            NullValueHandling = NullValueHandling.Ignore,            
-            Formatting = Formatting.None,
-            Converters =
-            {
-                new StringEnumConverter()
-            }
-        };
-
         private readonly string _baseUrl;
         private readonly string _token;
         private readonly RestClient _restClient;
         private bool _debugMode;
+        private NewtonsoftJsonSerializer _serializer;
 
         /// <summary>
         /// Creates client service
@@ -56,9 +40,9 @@ namespace Checkpoint.Crm.Client
             _baseUrl = new Uri(url).GetLeftPart(UriPartial.Authority);
             _token = token;
             _restClient = new RestClient(url);
-            var serializer = new NewtonsoftJsonSerializer(JsonSerializer);
-            _restClient.AddHandler("application/json", serializer);
-            _restClient.AddHandler("text/json", serializer);
+            _serializer = new NewtonsoftJsonSerializer();
+            _restClient.AddHandler("application/json", _serializer);
+            _restClient.AddHandler("text/json", _serializer);
         }
 
         public ApplicablePromoOffersResponse GetApplicablePromoOffers(GetApplicablePromoOffersRequest request)
@@ -290,8 +274,7 @@ namespace Checkpoint.Crm.Client
             request.AddHeader("Authorization", "Token " + _token);
             if (_debugMode)
                 request.AddHeader("X-Log", "1");
-            
-            request.JsonSerializer = new NewtonsoftJsonSerializer(JsonSerializer);
+            request.JsonSerializer = _serializer;
 
             if (filter != null)
             {

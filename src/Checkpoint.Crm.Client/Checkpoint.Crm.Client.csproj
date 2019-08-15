@@ -50,6 +50,7 @@
     <Compile Include="CheckpointClient.cs" />
     <Compile Include="Json\DateFormatter.cs" />
     <Compile Include="Json\CheckpointContractResolver.cs" />
+    <Compile Include="Json\DecimalConverter.cs" />
     <Compile Include="Json\FluentJson.cs" />
     <Compile Include="Json\NewtonsoftJsonSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
