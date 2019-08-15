@@ -12,7 +12,7 @@ namespace Checkpoint.Crm.Tests
     [TestFixture]
     public class GeneralTests
     {
-        private static string Url = "http://crm-dev.logus.pro/api";
+        private static string Url = "http://localhost:8000/api";
         private static string Token = Environment.GetEnvironmentVariable("CheckpointToken");
 
         [Test]

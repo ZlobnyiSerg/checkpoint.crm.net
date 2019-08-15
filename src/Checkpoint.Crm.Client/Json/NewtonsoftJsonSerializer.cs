@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using Newtonsoft.Json;
@@ -28,7 +29,14 @@ namespace Checkpoint.Crm.Client.Json
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 NullValueHandling = NullValueHandling.Include,
-                DefaultValueHandling = DefaultValueHandling.Include
+                DefaultValueHandling = DefaultValueHandling.Include,
+                Culture = new CultureInfo(string.Empty)
+                {
+                    NumberFormat = new NumberFormatInfo()
+                    {
+                        CurrencyDecimalDigits = 5
+                    }
+                }
             };
         }
 
