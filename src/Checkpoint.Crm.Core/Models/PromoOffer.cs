@@ -35,6 +35,12 @@ namespace Checkpoint.Crm.Core.Models
         /// <summary>
         ///     Признак, указывающий на то, что данное промо-предложение должно применяться автоматически
         /// </summary>
-        public bool AutoApply { get; set; }      
+        public bool AutoApply { get; set; }
+        
+        /// <summary>
+        ///     Признак, что применение промо-предложения может отслеживаться в системе лояльности.
+        ///     Не все предложения позволяют это делать, например предложения, ограничивающие лимит оплаты баллами. 
+        /// </summary>
+        public bool CanBeTracked { get; set; }
     }
 }
