@@ -71,7 +71,8 @@
     <Compile Include="Models\Orders\OrderItem.cs" />
     <Compile Include="Models\Orders\OrderList.cs" />
     <Compile Include="Models\Orders\Payment.cs" />
-    <Compile Include="Models\PromoOffer.cs" />
+    <Compile Include="Models\PromoOffer\PromoOffer.cs" />
+    <Compile Include="Models\PromoOffer\PromoOfferAction.cs" />
     <Compile Include="Models\Shared\Account.cs" />
     <Compile Include="Models\Shared\AccountOperation.cs" />
     <Compile Include="Models\Shared\AccountOperationList.cs" />
