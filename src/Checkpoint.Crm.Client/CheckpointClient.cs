@@ -49,7 +49,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest("offers", Method.POST);
             req.AddBody(request);
-            var response = _restClient.Execute<ApplicablePromoOffersResponse>(req);
+            var response = ExecuteRequestInternal<ApplicablePromoOffersResponse>(req);
             AssertOk(response);
             return response.Data;
         }
@@ -58,7 +58,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest("apply-offers", Method.POST);
             req.AddBody(request);
-            var response = _restClient.Execute<ApplyPromoOffersResponse>(req);
+            var response = ExecuteRequestInternal<ApplyPromoOffersResponse>(req);
             AssertOk(response);
             return response.Data;
         }
@@ -67,7 +67,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest("apply-offers/preview/", Method.POST);
             req.AddBody(request);
-            var response = _restClient.Execute<ApplyPromoOffersResponse>(req);
+            var response = ExecuteRequestInternal<ApplyPromoOffersResponse>(req);
             AssertOk(response);
             return response.Data;
         }
@@ -76,7 +76,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest("accounts/charge/", Method.POST);
             req.AddBody(request);
-            var response = _restClient.Execute<AccountOperation>(req);
+            var response = ExecuteRequestInternal<AccountOperation>(req);
             AssertOk(response);
             return response.Data;
         }
@@ -94,7 +94,7 @@ namespace Checkpoint.Crm.Client
             if (filter.AccountId != null)
                 req.AddQueryParameter("account_id", filter.AccountId.Value.ToString());
 
-            var res = _restClient.Execute<AccountOperationList>(req);
+            var res = ExecuteRequestInternal<AccountOperationList>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -103,7 +103,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest($"account-operations/{accountOperationId}/", Method.DELETE);
             
-            AssertOk(_restClient.Execute(req));
+            AssertOk(ExecuteRequestInternal(req));
         }
 
         public PointOfSaleList FindPointOfSales(PointOfSaleFilter filter)
@@ -116,7 +116,7 @@ namespace Checkpoint.Crm.Client
             if (!string.IsNullOrEmpty(filter.Name))
                 req.AddQueryParameter("name", filter.Name);
 
-            var res = _restClient.Execute<PointOfSaleList>(req);
+            var res = ExecuteRequestInternal<PointOfSaleList>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -125,7 +125,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest(request.Id == 0 ? "point-of-sales" : $"point-of-sales/{request.Id}/", request.Id == 0 ? Method.POST : Method.PUT);
             req.AddBody(request);
-            var res = _restClient.Execute<PointOfSale>(req);
+            var res = ExecuteRequestInternal<PointOfSale>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -133,7 +133,7 @@ namespace Checkpoint.Crm.Client
         public PointOfSale GetPointOfSale(long pointOfSaleId)
         {
             var req = BuildRequest($"point-of-sales/{pointOfSaleId}/", Method.GET);            
-            var res = _restClient.Execute<PointOfSale>(req);
+            var res = ExecuteRequestInternal<PointOfSale>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -141,7 +141,7 @@ namespace Checkpoint.Crm.Client
         public Order GetOrder(int orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.GET);
-            var res = _restClient.Execute<Order>(req);
+            var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -149,7 +149,7 @@ namespace Checkpoint.Crm.Client
         public Order GetOrder(string pointOfSaleCode, string externalOrderId)
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.GET);
-            var res = _restClient.Execute<Order>(req);
+            var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -161,7 +161,7 @@ namespace Checkpoint.Crm.Client
             if (filter.CustomerId != null)
                 req.AddQueryParameter("customer", filter.CustomerId.ToString());
 
-            var res = _restClient.Execute<OrderList>(req);
+            var res = ExecuteRequestInternal<OrderList>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -170,7 +170,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.POST);
             req.AddBody(order);            
-            var res = _restClient.Execute<Order>(req);
+            var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -178,14 +178,14 @@ namespace Checkpoint.Crm.Client
         public OrderExtraField GetOrderExtraField(int orderId, string fieldName)
         {
             var req = BuildRequest($"orders/{orderId}/extra-fields/{HttpUtility.UrlEncode(fieldName)}/", Method.GET);
-            var res = _restClient.Execute<OrderExtraField>(req);
+            var res = ExecuteRequestInternal<OrderExtraField>(req);
             AssertOk(res);
             return res.Data;
         }
         public void DeleteOrder(int orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.DELETE);                        
-            var res = _restClient.Execute<Order>(req);
+            var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);            
         }
 
@@ -193,7 +193,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest("tiers", Method.GET);
 
-            var res = _restClient.Execute<TierList>(req);
+            var res = ExecuteRequestInternal<TierList>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -209,7 +209,7 @@ namespace Checkpoint.Crm.Client
             if (filter.CustomerId != null)
                 req.AddQueryParameter("customer", filter.CustomerId.Value.ToString());
 
-            var res = _restClient.Execute<CardList>(req);
+            var res = ExecuteRequestInternal<CardList>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -218,7 +218,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest(request.Id == 0 ? "cards" : $"cards/{request.Id}/", request.Id == 0 ? Method.POST : Method.PUT);
             req.AddBody(request);
-            var res = _restClient.Execute<Card>(req);
+            var res = ExecuteRequestInternal<Card>(req);
             AssertOk(res);
             return res.Data;
         }
@@ -226,7 +226,7 @@ namespace Checkpoint.Crm.Client
         public Customer GetCustomer(int id)
         {
             var req = BuildRequest($"customers/{id}/", Method.GET);
-            var res = _restClient.Execute<Customer>(req);
+            var res = ExecuteRequestInternal<Customer>(req);
             AssertOk(res);
             res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
             return res.Data;
@@ -236,7 +236,7 @@ namespace Checkpoint.Crm.Client
         {
             var req = BuildRequest($"customers-sync/", Method.POST);
             req.AddBody(customer);
-            var res = _restClient.Execute<Customer>(req);
+            var res = ExecuteRequestInternal<Customer>(req);
             AssertOk(res);
             res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
             return res.Data;
@@ -253,7 +253,7 @@ namespace Checkpoint.Crm.Client
             if (!string.IsNullOrEmpty(filter.ExternalId))
                 req.AddQueryParameter("external_id", filter.ExternalId);
 
-            var res = _restClient.Execute<CustomerList>(req);
+            var res = ExecuteRequestInternal<CustomerList>(req);
             AssertOk(res);
             if (res.Data.Results != null)
                 foreach (var customer in res.Data.Results)
@@ -301,6 +301,16 @@ namespace Checkpoint.Crm.Client
                 && response.StatusCode != HttpStatusCode.OK
                 && response.StatusCode != HttpStatusCode.NoContent)
                 throw new LoyaltyException("Error processing request, status is: " + response.StatusCode);
+        }
+        
+        protected virtual IRestResponse ExecuteRequestInternal(IRestRequest request)
+        {
+            return _restClient.Execute(request);
+        }
+
+        protected virtual IRestResponse<T> ExecuteRequestInternal<T>(IRestRequest request) where T : new()
+        {
+            return _restClient.Execute<T>(request);
         }
 
         #endregion        
