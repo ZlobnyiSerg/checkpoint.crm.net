@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Threading;
 using System.Web;
 using Checkpoint.Crm.Client.Json;
 using Checkpoint.Crm.Core;
@@ -272,6 +273,7 @@ namespace Checkpoint.Crm.Client
                 url += "/";
             var request = new RestRequest(url, method) {RequestFormat = DataFormat.Json};
             request.AddHeader("Authorization", "Token " + _token);
+            request.AddHeader("Accept-Language", Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName);
             if (_debugMode)
                 request.AddHeader("X-Log", "1");
             request.JsonSerializer = _serializer;
