@@ -257,7 +257,7 @@ namespace Checkpoint.Crm.Client
                 req.AddQueryParameter("last_name", filter.LastName);
 
             if (filter.BirthDate != null)
-                req.AddQueryParameter("birth_date", filter.BirthDate.Value.ToString("YYYY-MM-dd"));
+                req.AddQueryParameter("birth_date", filter.BirthDate.Value.ToString("yyyy-MM-dd"));
             
             if (!string.IsNullOrEmpty(filter.ExternalId))
                 req.AddQueryParameter("external_id", filter.ExternalId);
