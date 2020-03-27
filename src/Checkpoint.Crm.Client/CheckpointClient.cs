@@ -249,11 +249,19 @@ namespace Checkpoint.Crm.Client
 
             if (!string.IsNullOrEmpty(filter.Email))
                 req.AddQueryParameter("email", filter.Email);
+            
             if (!string.IsNullOrEmpty(filter.Phone))
                 req.AddQueryParameter("phone", filter.Phone);
+
+            if (!string.IsNullOrEmpty(filter.LastName))
+                req.AddQueryParameter("last_name", filter.LastName);
+
+            if (filter.BirthDate != null)
+                req.AddQueryParameter("birth_date", filter.BirthDate.Value.ToString("YYYY-MM-dd"));
+            
             if (!string.IsNullOrEmpty(filter.ExternalId))
                 req.AddQueryParameter("external_id", filter.ExternalId);
-
+            
             var res = ExecuteRequestInternal<CustomerList>(req);
             AssertOk(res);
             if (res.Data.Results != null)
