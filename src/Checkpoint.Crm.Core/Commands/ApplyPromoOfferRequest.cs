@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Checkpoint.Crm.Core.Models;
 using Checkpoint.Crm.Core.Models.Orders;
 
 namespace Checkpoint.Crm.Core.Commands
@@ -29,5 +30,10 @@ namespace Checkpoint.Crm.Core.Commands
         ///     Обновленная информация о визите
         /// </summary>
         public Order Order { get; set; }
+        
+        /// <summary>
+        /// Перечень применённых промо-предложений
+        /// </summary>
+        public PromoOffer[] Offers { get;set; }
     }
 }
