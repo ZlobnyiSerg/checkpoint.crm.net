@@ -14,11 +14,21 @@ namespace Checkpoint.Crm.Core.Models.Orders
         ///     Клиент
         /// </summary>
         public Customer Customer { get; set; }
-        
+
         /// <summary>
         ///     Идентификатор клиента
         /// </summary>
         public int? CustomerId { get; set; }
+        
+        /// <summary>
+        /// Идентификатор гостя в момент создания заказа
+        /// </summary>
+        public int? CustomerTierId { get; set; }
+        
+        /// <summary>
+        /// Идентификатор родительского заказа
+        /// </summary>
+        public int? ParentId { get; set; }
 
         /// <summary>
         ///     Идентификатор карты лояльности, применённой к заказу
