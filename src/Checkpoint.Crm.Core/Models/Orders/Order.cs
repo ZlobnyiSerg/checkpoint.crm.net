@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Checkpoint.Crm.Core.Models.Base;
+using Checkpoint.Crm.Core.Models.Cards;
 using Checkpoint.Crm.Core.Models.Customers;
 
 namespace Checkpoint.Crm.Core.Models.Orders
@@ -23,7 +24,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         /// <summary>
         /// Идентификатор гостя в момент создания заказа
         /// </summary>
-        public int? CustomerTierId { get; set; }
+        public Tier CustomerTier { get; set; }
         
         /// <summary>
         /// Идентификатор родительского заказа
