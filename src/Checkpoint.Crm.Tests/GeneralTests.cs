@@ -118,6 +118,17 @@ namespace Checkpoint.Crm.Tests
 
             cli.DeleteOrder(order.Id);
         }
+        
+        [Test]
+        public void TestCustomerSearch()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var customers = cli.FindCustomers(new CustomerFilter
+            {
+                BirthDate = new DateTime(2020, 1, 1)
+            });
+            Assert.Greater(customers.Count, 0);
+        }
 
         /*[Test]
         public void TestOrderCreation()

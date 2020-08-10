@@ -18,7 +18,6 @@ namespace Checkpoint.Crm.Core
         /// <summary>
         ///     Определяет набор промо-предложений с их описанием, которые применимы к указанным визитам гостя
         /// </summary>        
-        [OperationContract]
         ApplicablePromoOffersResponse GetApplicablePromoOffers(GetApplicablePromoOffersRequest request);
 
         /// <summary>
