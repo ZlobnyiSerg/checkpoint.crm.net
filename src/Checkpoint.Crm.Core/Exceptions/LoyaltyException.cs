@@ -2,6 +2,7 @@
 
 namespace Checkpoint.Crm.Core.Exceptions
 {
+    [Serializable]
     public class LoyaltyException : ApplicationException
     {
         public LoyaltyException()

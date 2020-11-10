@@ -22,9 +22,14 @@ namespace Checkpoint.Crm.Core.Models.Orders
         public int? CustomerId { get; set; }
         
         /// <summary>
-        /// Идентификатор гостя в момент создания заказа
+        /// Уровень гостя, зафиксированный для данного заказа
         /// </summary>
         public Tier CustomerTier { get; set; }
+        
+        /// <summary>
+        /// Идентификатор гостя, зафиксированный для данного заказа
+        /// </summary>
+        public int? CustomerTierId { get; set; }
         
         /// <summary>
         /// Идентификатор родительского заказа

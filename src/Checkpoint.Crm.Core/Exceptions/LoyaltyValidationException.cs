@@ -2,6 +2,7 @@ using System;
 
 namespace Checkpoint.Crm.Core.Exceptions
 {
+    [Serializable]
     public class LoyaltyValidationException : LoyaltyException
     {
         public LoyaltyValidationException()
