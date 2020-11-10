@@ -13,8 +13,10 @@ namespace Checkpoint.Crm.Core.Models.Base
         public DateTime? ModifiedSince { get; set; }
 
         /// <summary>
-        ///     Номер страницы
+        ///     Размер ограничений записей
         /// </summary>
-        public int? Page { get; set; }
+        public long? Limit { get; set; }
+        
+        public long? Offset { get; set; }
     }
 }

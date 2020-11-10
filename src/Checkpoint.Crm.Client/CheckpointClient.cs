@@ -261,6 +261,8 @@ namespace Checkpoint.Crm.Client
             
             if (!string.IsNullOrEmpty(filter.ExternalId))
                 req.AddQueryParameter("external_id", filter.ExternalId);
+            if (!string.IsNullOrEmpty(filter.Query))
+                req.AddQueryParameter("search", filter.Query);
             
             var res = ExecuteRequestInternal<CustomerList>(req);
             AssertOk(res);
@@ -290,8 +292,10 @@ namespace Checkpoint.Crm.Client
             {
                 if (filter.ModifiedSince != null)
                     request.AddQueryParameter("date_modified__gt", filter.ModifiedSince.Value.ToString("YYYY-DD-MMTHH:mm:ss"));
-                if (filter.Page != null)
-                    request.AddQueryParameter("page", filter.Page.Value.ToString());
+                if (filter.Limit != null)
+                    request.AddQueryParameter("limit", filter.Limit.Value.ToString());
+                if (filter.Offset != null)
+                    request.AddQueryParameter("offset", filter.Offset.Value.ToString());
             }
 
             return request;
