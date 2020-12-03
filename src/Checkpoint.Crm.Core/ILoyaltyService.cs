@@ -146,10 +146,9 @@ namespace Checkpoint.Crm.Core
         CardList FindCards(CardFilter filter);
 
         /// <summary>
-        ///     Создаёт или сохраняет карту лояльности
+        ///     Выпускает новую карту лояльности и привязывает к гостю
         /// </summary>
-        /// <param name="card"></param>        
-        Card CreateUpdateCard(Card card);
+        Card IssueCard(IssueCardRequest request);
 
         #endregion
 

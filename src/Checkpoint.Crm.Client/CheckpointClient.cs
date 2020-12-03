@@ -215,9 +215,9 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
-        public Card CreateUpdateCard(Card request)
+        public Card IssueCard(IssueCardRequest request)
         {
-            var req = BuildRequest(request.Id == 0 ? "cards" : $"cards/{request.Id}/", request.Id == 0 ? Method.POST : Method.PUT);
+            var req = BuildRequest("cards", Method.POST);
             req.AddBody(request);
             var res = ExecuteRequestInternal<Card>(req);
             AssertOk(res);

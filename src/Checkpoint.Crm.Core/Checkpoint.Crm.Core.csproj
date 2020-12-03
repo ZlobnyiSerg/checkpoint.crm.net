@@ -47,6 +47,7 @@
     <Compile Include="Commands\ChargePointsRequest.cs" />
     <Compile Include="Commands\CustomerFilter.cs" />
     <Compile Include="Commands\GetApplicablePromoOffersRequest.cs" />
+    <Compile Include="Commands\IssueCardRequest.cs" />
     <Compile Include="Commands\LoyalityTransactionRuleDto.cs" />
     <Compile Include="Commands\OrderFilter.cs" />
     <Compile Include="Exceptions\LoyaltyException.cs" />

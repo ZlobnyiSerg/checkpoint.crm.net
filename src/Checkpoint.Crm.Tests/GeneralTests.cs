@@ -13,7 +13,7 @@ namespace Checkpoint.Crm.Tests
     public class GeneralTests
     {
         private static string Url = "http://localhost:8000/api";
-        private static string Token = Environment.GetEnvironmentVariable("CheckpointToken");
+        private static string Token = "3c464b1077f311f6ab8c8850476aec0ff29b01c6";
 
         [Test]
         public void TestConnection()
@@ -169,6 +169,17 @@ namespace Checkpoint.Crm.Tests
             Assert.AreEqual(1, tc.Array[0]);
             Assert.AreEqual(2, tc.Array[1]);
             Assert.AreEqual(3, tc.Array[2]);
+        }
+        
+        [Test]
+        public void TestCardsList()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var cards = cli.FindCards(new CardFilter
+            {
+                Limit = 10
+            });
+            Assert.Greater(cards.Count, 0);
         }
     }
 
