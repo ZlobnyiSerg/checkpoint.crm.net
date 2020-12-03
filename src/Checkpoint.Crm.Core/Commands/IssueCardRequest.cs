@@ -19,5 +19,15 @@ namespace Checkpoint.Crm.Core.Commands
         /// Tier of issued card
         /// </summary>
         public int TierId { get; set; }
+        
+        /// <summary>
+        /// Card issuer 
+        /// </summary>
+        public string Issuer { get; set; }
+        
+        /// <summary>
+        /// If this flag is set, other customer's cards will be deactivated
+        /// </summary>
+        public bool DeactivateOtherCards { get; set; }
     }
 }
