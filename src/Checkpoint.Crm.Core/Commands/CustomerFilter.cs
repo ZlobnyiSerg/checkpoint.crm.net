@@ -37,5 +37,10 @@ namespace Checkpoint.Crm.Core.Commands
         /// Поисковой запрос (по фио, емейлу и т.п.)
         /// </summary>
         public string Query { get; set; }
+        
+        /// <summary>
+        /// Закрытые профили?
+        /// </summary>
+        public bool? IsClosed { get; set; }
     }
 }

@@ -263,6 +263,8 @@ namespace Checkpoint.Crm.Client
                 req.AddQueryParameter("external_id", filter.ExternalId);
             if (!string.IsNullOrEmpty(filter.Query))
                 req.AddQueryParameter("search", filter.Query);
+            if (filter.IsClosed != null)
+                req.AddQueryParameter("is_closed", filter.IsClosed.ToString().ToLowerInvariant());
             
             var res = ExecuteRequestInternal<CustomerList>(req);
             AssertOk(res);

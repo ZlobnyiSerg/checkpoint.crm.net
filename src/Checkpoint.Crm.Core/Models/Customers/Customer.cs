@@ -70,9 +70,9 @@ namespace Checkpoint.Crm.Core.Models.Customers
         public string Notes { get; set; }
         
         /// <summary>
-        /// Статус клиента (OPEN, CLOSED)
+        /// Признак что профиль закрыт
         /// </summary>
-        public string Status { get; set; }
+        public bool IsClosed { get; set; }
         
         /// <summary>
         /// Профиль, с которым было осуществлено слияние
