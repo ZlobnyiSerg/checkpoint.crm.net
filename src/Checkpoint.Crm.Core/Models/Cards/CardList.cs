@@ -2,7 +2,7 @@
 
 namespace Checkpoint.Crm.Core.Models.Cards
 {
-    public class CardList : ListBase<Card>
+    public class CardList : ListBase<CardSlimModel>
     {
     }
 }
