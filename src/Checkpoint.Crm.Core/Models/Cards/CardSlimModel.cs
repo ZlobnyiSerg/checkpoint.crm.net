@@ -71,12 +71,12 @@ public class CardSlimModel
     /// <summary>
     /// Code of current card tier
     /// </summary>
-    public string CurrentTierCode { get; set; }
+    public string? CurrentTierCode { get; set; }
 
     /// <summary>
     /// Name of current tier
     /// </summary>
-    public string CurrentTierName { get; set; }
+    public string? CurrentTierName { get; set; }
 
     /// <summary>
     /// Expected tier id

@@ -82,7 +82,7 @@ namespace Checkpoint.Crm.Core.Models.Customers
         /// <summary>
         /// Карты, привязанные к клиенту
         /// </summary>
-        public Card[] Cards { get; set; }
+        public CardDetailedModel[] Cards { get; set; }
         
         /// <summary>
         /// Предпочтения клиента

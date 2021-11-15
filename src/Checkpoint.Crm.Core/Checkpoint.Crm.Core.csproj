@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>default</LangVersion>
-    <Nullable>warnings</Nullable>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,6 +61,7 @@
     <Compile Include="Models\Base\ListBase.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Models\Cards\Card.cs" />
+    <Compile Include="Models\Cards\CardDetailedModel.cs" />
     <Compile Include="Models\Cards\CardList.cs" />
     <Compile Include="Models\Cards\CardSlimModel.cs" />
     <Compile Include="Models\Cards\Tier.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Models\Shared\PointOfSale.cs" />
     <Compile Include="Models\Shared\PointOfSaleFilter.cs" />
     <Compile Include="Models\Shared\PointOfSaleList.cs" />
+    <Compile Include="Models\Shared\ProgramModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
