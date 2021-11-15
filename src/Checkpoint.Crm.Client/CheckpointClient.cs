@@ -11,10 +11,7 @@ using Checkpoint.Crm.Core.Models.Cards;
 using Checkpoint.Crm.Core.Models.Customers;
 using Checkpoint.Crm.Core.Models.Orders;
 using Checkpoint.Crm.Core.Models.Shared;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using RestSharp;
-using RestSharp.Extensions;
 using RestRequest = RestSharp.RestRequest;
 
 namespace Checkpoint.Crm.Client
@@ -24,8 +21,8 @@ namespace Checkpoint.Crm.Client
         private readonly string _baseUrl;
         private readonly string _token;
         private readonly RestClient _restClient;
-        private bool _debugMode;
-        private NewtonsoftJsonSerializer _serializer;
+        private readonly bool _debugMode;
+        private readonly NewtonsoftJsonSerializer _serializer;
 
         /// <summary>
         /// Creates client service
@@ -40,16 +37,19 @@ namespace Checkpoint.Crm.Client
                 url += "/";
             _baseUrl = new Uri(url).GetLeftPart(UriPartial.Authority);
             _token = token;
-            _restClient = new RestClient(url);
+            _restClient = new RestClient(url)
+            {
+                ThrowOnAnyError = true
+            };
             _serializer = new NewtonsoftJsonSerializer();
-            _restClient.AddHandler("application/json", _serializer);
-            _restClient.AddHandler("text/json", _serializer);
+            _restClient.AddHandler("application/json", () => _serializer);
+            _restClient.AddHandler("text/json", () => _serializer);
         }
 
         public ApplicablePromoOffersResponse GetApplicablePromoOffers(GetApplicablePromoOffersRequest request)
         {
             var req = BuildRequest("offers", Method.POST);
-            req.AddBody(request);
+            req.AddJsonBody(request);
             var response = ExecuteRequestInternal<ApplicablePromoOffersResponse>(req);
             AssertOk(response);
             return response.Data;
@@ -58,7 +58,7 @@ namespace Checkpoint.Crm.Client
         public ApplyPromoOffersResponse ApplyPromoOffers(ApplyPromoOffersRequest request)
         {
             var req = BuildRequest("apply-offers", Method.POST);
-            req.AddBody(request);
+            req.AddJsonBody(request);
             var response = ExecuteRequestInternal<ApplyPromoOffersResponse>(req);
             AssertOk(response);
             return response.Data;
@@ -67,7 +67,7 @@ namespace Checkpoint.Crm.Client
         public ApplyPromoOffersResponse PreviewPromoOffers(ApplyPromoOffersRequest request)
         {
             var req = BuildRequest("apply-offers/preview/", Method.POST);
-            req.AddBody(request);
+            req.AddJsonBody(request);
             var response = ExecuteRequestInternal<ApplyPromoOffersResponse>(req);
             AssertOk(response);
             return response.Data;
@@ -76,7 +76,7 @@ namespace Checkpoint.Crm.Client
         public AccountOperation ChargePoints(ChargePointsRequest request)
         {
             var req = BuildRequest("accounts/charge/", Method.POST);
-            req.AddBody(request);
+            req.AddJsonBody(request);
             var response = ExecuteRequestInternal<AccountOperation>(req);
             AssertOk(response);
             return response.Data;
@@ -125,7 +125,7 @@ namespace Checkpoint.Crm.Client
         public PointOfSale CreateOrUpdatePos(PointOfSale request)
         {
             var req = BuildRequest(request.Id == 0 ? "point-of-sales" : $"point-of-sales/{request.Id}/", request.Id == 0 ? Method.POST : Method.PUT);
-            req.AddBody(request);
+            req.AddJsonBody(request);
             var res = ExecuteRequestInternal<PointOfSale>(req);
             AssertOk(res);
             return res.Data;
@@ -170,7 +170,7 @@ namespace Checkpoint.Crm.Client
         public Order CreateUpdateOrder(string pointOfSaleCode, string externalOrderId, Order order)
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.POST);
-            req.AddBody(order);            
+            req.AddJsonBody(order);            
             var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);
             return res.Data;
@@ -183,6 +183,7 @@ namespace Checkpoint.Crm.Client
             AssertOk(res);
             return res.Data;
         }
+        
         public void DeleteOrder(int orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.DELETE);                        
@@ -218,7 +219,7 @@ namespace Checkpoint.Crm.Client
         public Card IssueCard(IssueCardRequest request)
         {
             var req = BuildRequest("cards", Method.POST);
-            req.AddBody(request);
+            req.AddJsonBody(request);
             var res = ExecuteRequestInternal<Card>(req);
             AssertOk(res);
             return res.Data;
@@ -235,12 +236,24 @@ namespace Checkpoint.Crm.Client
         
         public Customer CreateUpdateCustomer(Customer customer)
         {
-            var req = BuildRequest($"customers-sync/", Method.POST);
-            req.AddBody(customer);
-            var res = ExecuteRequestInternal<Customer>(req);
-            AssertOk(res);
-            res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
-            return res.Data;
+            if (customer.Id != 0)
+            {
+                var req = BuildRequest($"customers/{customer.Id}/", Method.POST);
+                req.AddJsonBody(customer);
+                var res = ExecuteRequestInternal<Customer>(req);
+                AssertOk(res);
+                res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
+                return res.Data;
+            }
+            else
+            {
+                var req = BuildRequest("customers-sync/", Method.POST);
+                req.AddJsonBody(customer);
+                var res = ExecuteRequestInternal<Customer>(req);
+                AssertOk(res);
+                res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
+                return res.Data;
+            }
         }
 
         public CustomerList FindCustomers(CustomerFilter filter)
@@ -313,10 +326,6 @@ namespace Checkpoint.Crm.Client
                 throw new LoyaltyException("Internal server error: " + response.Content);
             if (response.ErrorException != null)
                 throw new LoyaltyException(response.ErrorException.Message, response.ErrorException);
-            if (response.StatusCode != HttpStatusCode.Created
-                && response.StatusCode != HttpStatusCode.OK
-                && response.StatusCode != HttpStatusCode.NoContent)
-                throw new LoyaltyException("Error processing request, status is: " + response.StatusCode);
         }
         
         protected virtual IRestResponse ExecuteRequestInternal(IRestRequest request)

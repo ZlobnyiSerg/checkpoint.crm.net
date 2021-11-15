@@ -24,7 +24,6 @@ namespace Checkpoint.Crm.Tests
             Assert.Greater(res.Count, 0);
         }
 
-
         [Test]
         public void TestOrderSearch()
         {
@@ -91,6 +90,7 @@ namespace Checkpoint.Crm.Tests
                 DateStart = DateTime.Today.AddDays(-1),
                 DateEnd = DateTime.Today,
                 Name = "Reservation",
+                PosCode = "MAIN",
                 Customer = new Customer
                 {
                     ExternalId = Guid.NewGuid().ToString(),
@@ -125,38 +125,10 @@ namespace Checkpoint.Crm.Tests
             var cli = new CheckpointClient(Url, Token);
             var customers = cli.FindCustomers(new CustomerFilter
             {
-                BirthDate = new DateTime(2020, 1, 1)
+                ExternalId = "1b057f36-5f15-4148-b907-54e9c1cccaf0"
             });
-            Assert.Greater(customers.Count, 0);
+            Assert.Greater(customers.Count, 1);
         }
-
-        /*[Test]
-        public void TestOrderCreation()
-        {
-            var cli = new CheckpointClient(Url, Token);
-                        
-            
-            var order = new Order
-            {                                
-                ExternalId = Guid.NewGuid().ToString(),
-                DateStart = DateTime.Today.AddDays(-1),
-                DateEnd = DateTime.Today,
-                Name = "test1",
-                Customer = new Customer
-                {
-                    ExternalId = Guid.NewGuid().ToString(),
-                    FirstName = "Serg",
-                    LastName = "Zhi",
-                    Email = "test123425@gmail.com",
-                    Phone = "+7999112233",
-                    BirthDate = DateTime.Today.AddYears(-12)
-                }
-            };
-            
-            order = cli.CreateUpdateOrder("c1", order.ExternalId, order);
-            
-            Assert.Greater(order.Id, 0);
-        }*/
 
         [Test]
         public void TestArrayDeserialization()
@@ -177,9 +149,17 @@ namespace Checkpoint.Crm.Tests
             var cli = new CheckpointClient(Url, Token);
             var cards = cli.FindCards(new CardFilter
             {
-                Limit = 10
+                CardNo = "8760c21e-0da8-4e54-a21f-2f037c3ed3ab",
+                Limit = 1
             });
             Assert.Greater(cards.Count, 0);
+        }
+        
+        [Test]
+        public void TestBonusCharge()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var cards = cli.ChargePoints(new ChargePointsRequest("8760c21e-0da8-4e54-a21f-2f037c3ed3ab", "Тест", 10));
         }
     }
 

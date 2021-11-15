@@ -9,12 +9,23 @@ using Newtonsoft.Json.Serialization;
 namespace Checkpoint.Crm.Client.Json
 {
     public class CheckpointContractResolver : FluentContractResolver
-    {        
+    {
+        private readonly bool _useSnakeCaseNotation;
+
+        public CheckpointContractResolver(bool useSnakeCaseNotation = true)
+        {
+            _useSnakeCaseNotation = useSnakeCaseNotation;
+        }
+
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             var property = base.CreateProperty(member, memberSerialization);
-            property.PropertyName = ConvertPropertyName(property.PropertyName);
-            
+
+            if (_useSnakeCaseNotation)
+            {
+                property.PropertyName = ConvertPropertyName(property.PropertyName);
+            }
+
             if (!property.Writable)
             {
                 var prop = member as PropertyInfo;

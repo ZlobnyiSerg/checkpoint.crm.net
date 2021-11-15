@@ -66,5 +66,19 @@ namespace Checkpoint.Crm.Core.Commands
             Amount = amount;
             InitiatorUser = initiatorUser;
         }
+
+        public ChargePointsRequest(string cardNo, string name, decimal amount)
+        {
+            CardNo = cardNo;
+            Name = name;
+            Amount = amount;
+        }
+
+        public ChargePointsRequest(int? accountId, string name, decimal amount)
+        {
+            AccountId = accountId;
+            Name = name;
+            Amount = amount;
+        }
     }
 }
