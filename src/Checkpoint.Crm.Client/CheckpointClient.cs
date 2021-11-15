@@ -238,7 +238,7 @@ namespace Checkpoint.Crm.Client
         {
             if (customer.Id != 0)
             {
-                var req = BuildRequest($"customers/{customer.Id}/", Method.POST);
+                var req = BuildRequest($"customers/{customer.Id}/", Method.PUT);
                 req.AddJsonBody(customer);
                 var res = ExecuteRequestInternal<Customer>(req);
                 AssertOk(res);
