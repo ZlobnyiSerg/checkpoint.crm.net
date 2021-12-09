@@ -16,6 +16,7 @@ using RestRequest = RestSharp.RestRequest;
 
 namespace Checkpoint.Crm.Client
 {
+    /// <inheritdoc />
     public class CheckpointClient : ILoyaltyService
     {
         private readonly string _baseUrl;
@@ -46,6 +47,7 @@ namespace Checkpoint.Crm.Client
             _restClient.AddHandler("text/json", () => _serializer);
         }
 
+        /// <inheritdoc />
         public ApplicablePromoOffersResponse GetApplicablePromoOffers(GetApplicablePromoOffersRequest request)
         {
             var req = BuildRequest("offers", Method.POST);
@@ -55,6 +57,7 @@ namespace Checkpoint.Crm.Client
             return response.Data;
         }
 
+        /// <inheritdoc />
         public ApplyPromoOffersResponse ApplyPromoOffers(ApplyPromoOffersRequest request)
         {
             var req = BuildRequest("apply-offers", Method.POST);
@@ -64,6 +67,7 @@ namespace Checkpoint.Crm.Client
             return response.Data;
         }
 
+        /// <inheritdoc />
         public ApplyPromoOffersResponse PreviewPromoOffers(ApplyPromoOffersRequest request)
         {
             var req = BuildRequest("apply-offers/preview/", Method.POST);
@@ -73,6 +77,7 @@ namespace Checkpoint.Crm.Client
             return response.Data;
         }
 
+        /// <inheritdoc />
         public AccountOperation ChargePoints(ChargePointsRequest request)
         {
             var req = BuildRequest("accounts/charge/", Method.POST);
@@ -82,6 +87,7 @@ namespace Checkpoint.Crm.Client
             return response.Data;
         }
 
+        /// <inheritdoc />
         public AccountOperationList FindAccountOperations(AccountOperationFilter filter)
         {
             var req = BuildRequest("account-operations", Method.GET, filter);
@@ -100,6 +106,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public void ChargedPointsDelete(int accountOperationId)
         {
             var req = BuildRequest($"account-operations/{accountOperationId}/", Method.DELETE);
@@ -107,6 +114,7 @@ namespace Checkpoint.Crm.Client
             AssertOk(ExecuteRequestInternal(req));
         }
 
+        /// <inheritdoc />
         public PointOfSaleList FindPointOfSales(PointOfSaleFilter filter)
         {
             var req = BuildRequest("point-of-sales", Method.GET, filter);
@@ -122,6 +130,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public PointOfSale CreateOrUpdatePos(PointOfSale request)
         {
             var req = BuildRequest(request.Id == 0 ? "point-of-sales" : $"point-of-sales/{request.Id}/", request.Id == 0 ? Method.POST : Method.PUT);
@@ -131,6 +140,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public PointOfSale GetPointOfSale(long pointOfSaleId)
         {
             var req = BuildRequest($"point-of-sales/{pointOfSaleId}/", Method.GET);            
@@ -139,6 +149,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public Order GetOrder(int orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.GET);
@@ -146,7 +157,8 @@ namespace Checkpoint.Crm.Client
             AssertOk(res);
             return res.Data;
         }
-        
+
+        /// <inheritdoc />
         public Order GetOrder(string pointOfSaleCode, string externalOrderId)
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.GET);
@@ -155,6 +167,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public OrderList FindOrders(OrderFilter filter)
         {
             var req = BuildRequest("orders", Method.GET, filter);
@@ -167,6 +180,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public Order CreateUpdateOrder(string pointOfSaleCode, string externalOrderId, Order order)
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.POST);
@@ -176,6 +190,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public OrderExtraField GetOrderExtraField(int orderId, string fieldName)
         {
             var req = BuildRequest($"orders/{orderId}/extra-fields/{HttpUtility.UrlEncode(fieldName)}/", Method.GET);
@@ -183,7 +198,8 @@ namespace Checkpoint.Crm.Client
             AssertOk(res);
             return res.Data;
         }
-        
+
+        /// <inheritdoc />
         public void DeleteOrder(int orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.DELETE);                        
@@ -191,6 +207,7 @@ namespace Checkpoint.Crm.Client
             AssertOk(res);            
         }
 
+        /// <inheritdoc />
         public TierList GetTiers()
         {
             var req = BuildRequest("tiers", Method.GET);
@@ -200,6 +217,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public CardList FindCards(CardFilter filter)
         {
             var req = BuildRequest("cards", Method.GET, filter);
@@ -216,6 +234,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public Card IssueCard(IssueCardRequest request)
         {
             var req = BuildRequest("cards", Method.POST);
@@ -225,6 +244,7 @@ namespace Checkpoint.Crm.Client
             return res.Data;
         }
 
+        /// <inheritdoc />
         public Customer GetCustomer(int id)
         {
             var req = BuildRequest($"customers/{id}/", Method.GET);
@@ -233,7 +253,18 @@ namespace Checkpoint.Crm.Client
             res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
             return res.Data;
         }
-        
+
+        /// <inheritdoc />
+        public Customer GetCustomerByExternalId(string externalId)
+        {
+            var req = BuildRequest($"customers/eid/{externalId}/", Method.GET);
+            var res = ExecuteRequestInternal<Customer>(req);
+            AssertOk(res);
+            res.Data.ViewUrl = _baseUrl + res.Data.ViewUrl;
+            return res.Data;
+        }
+
+        /// <inheritdoc />
         public Customer CreateUpdateCustomer(Customer customer)
         {
             if (customer.Id != 0)
@@ -256,6 +287,7 @@ namespace Checkpoint.Crm.Client
             }
         }
 
+        /// <inheritdoc />
         public CustomerList FindCustomers(CustomerFilter filter)
         {
             var req = BuildRequest("customers", Method.GET, filter);

@@ -158,7 +158,14 @@ namespace Checkpoint.Crm.Core
         /// Возвращает клиента по идентификатору, либо null
         /// </summary>        
         /// <returns></returns>
-        Customer GetCustomer(int id);        
+        Customer GetCustomer(int id);
+
+        /// <summary>
+        /// Возвращает клиента по внешнему идентификатору, либо null если не найден
+        /// </summary>
+        /// <param name="externalId">Идентификатор клиента во внешней системе</param>
+        /// <returns></returns>
+        Customer GetCustomerByExternalId(string externalId);
 
         /// <summary>
         /// Создаёт или обновляет профиль клиента. Если указан идентификатор (<see cref="Id"/>) то будет обновлен профиль по идентификатору, в противном случае
