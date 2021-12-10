@@ -30,7 +30,7 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         ///     Обновленная информация о визите
         /// </summary>
-        public Order Order { get; set; }
+        public OrderResultModel Order { get; set; }
         
         /// <summary>
         /// Перечень применённых промо-предложений
