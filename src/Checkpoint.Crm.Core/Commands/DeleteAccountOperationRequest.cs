@@ -14,4 +14,9 @@ public class DeleteAccountOperationRequest
     /// Пользователь, иницировавший запрос
     /// </summary>
     public string? InitiatorUser { get; set; }
+    
+    /// <summary>
+    /// Внешний идентификатор операции списания
+    /// </summary>
+    public string? ExternalId { get; set; }
 }
