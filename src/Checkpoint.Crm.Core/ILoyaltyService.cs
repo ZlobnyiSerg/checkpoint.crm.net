@@ -53,8 +53,8 @@ namespace Checkpoint.Crm.Core
         /// <summary>
         /// Удаляет операцию списания баллов
         /// </summary>
-        /// <param name="accountOperationId"></param>
-        void ChargedPointsDelete(int accountOperationId);
+        /// <param name="request">Запрос на удаление/корректировку операции с баллами</param>
+        void ChargedPointsDelete(DeleteAccountOperationRequest request);
 
         #endregion
 

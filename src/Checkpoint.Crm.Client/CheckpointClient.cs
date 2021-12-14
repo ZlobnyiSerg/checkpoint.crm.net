@@ -107,10 +107,10 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public void ChargedPointsDelete(int accountOperationId)
+        public void ChargedPointsDelete(DeleteAccountOperationRequest request)
         {
-            var req = BuildRequest($"account-operations/{accountOperationId}/", Method.DELETE);
-            
+            var req = BuildRequest($"account-operations/{request.AccountOperationId}/", Method.DELETE);
+            req.AddJsonBody(request);
             AssertOk(ExecuteRequestInternal(req));
         }
 

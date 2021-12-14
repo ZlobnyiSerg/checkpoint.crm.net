@@ -114,7 +114,10 @@ namespace Checkpoint.Crm.Tests
             Assert.IsNotNull(pointOperation);
             Assert.Greater(pointOperation.Id, 0);
             
-            cli.ChargedPointsDelete(pointOperation.Id);
+            cli.ChargedPointsDelete(new DeleteAccountOperationRequest
+            {
+                AccountOperationId = pointOperation.Id
+            });
 
             cli.DeleteOrder(order.Id);
         }

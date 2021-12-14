@@ -50,6 +50,7 @@
     <Compile Include="Commands\CardFilter.cs" />
     <Compile Include="Commands\ChargePointsRequest.cs" />
     <Compile Include="Commands\CustomerFilter.cs" />
+    <Compile Include="Commands\DeleteAccountOperationRequest.cs" />
     <Compile Include="Commands\GetApplicablePromoOffersRequest.cs" />
     <Compile Include="Commands\IssueCardRequest.cs" />
     <Compile Include="Commands\LoyalityTransactionRuleDto.cs" />
