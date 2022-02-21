@@ -8,16 +8,6 @@ namespace Checkpoint.Crm.Core.Commands
     public class AccountOperationFilter : FilterBase
     {
         /// <summary>
-        /// Код точки продаж
-        /// </summary>
-        public string PointOfSaleCode { get; set; }               
-        
-        /// <summary>
-        /// Внешний идентификатор операции по счёту
-        /// </summary>
-        public string ExternalId { get; set; }
-        
-        /// <summary>
         /// Идентификатор аккаунта (счёта) бонусного счёта
         /// </summary>
         public int? AccountId { get; set; }

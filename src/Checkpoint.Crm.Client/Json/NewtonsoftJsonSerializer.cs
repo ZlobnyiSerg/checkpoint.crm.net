@@ -13,7 +13,7 @@ namespace Checkpoint.Crm.Client.Json
 {
     public class NewtonsoftJsonSerializer : ISerializer, IDeserializer
     {
-        private static readonly Newtonsoft.Json.JsonSerializer _serializer = new Newtonsoft.Json.JsonSerializer
+        private static readonly JsonSerializer Serializer = new JsonSerializer
         {
             ContractResolver = new CheckpointContractResolver()
                 .AddSettings<Customer>(c =>
@@ -46,23 +46,17 @@ namespace Checkpoint.Crm.Client.Json
 
         public string Serialize(object obj)
         {
-            using (var stringWriter = new StringWriter())
-            {
-                using (var jsonTextWriter = new JsonTextWriter(stringWriter))
-                {
-                    _serializer.Serialize(jsonTextWriter, obj);
-                    return stringWriter.ToString();
-                }
-            }
+            using var stringWriter = new StringWriter();
+            using var jsonTextWriter = new JsonTextWriter(stringWriter);
+            Serializer.Serialize(jsonTextWriter, obj);
+            return stringWriter.ToString();
         }
 
         public T Deserialize<T>(IRestResponse response)
         {
-            using (var stringReader = new StringReader(response.Content))
-            {
-                using (var jsonTextReader = new JsonTextReader(stringReader))
-                    return _serializer.Deserialize<T>(jsonTextReader);
-            }
+            using var stringReader = new StringReader(response.Content);
+            using var jsonTextReader = new JsonTextReader(stringReader);
+            return Serializer.Deserialize<T>(jsonTextReader);
         }
     }
 }

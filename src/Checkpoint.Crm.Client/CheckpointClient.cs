@@ -31,7 +31,8 @@ namespace Checkpoint.Crm.Client
         /// <param name="url">URL to loyalty server</param>
         /// <param name="token">Auth token to login</param>
         /// <param name="debugMode">If set, requests may be logged on server side (can be slower, avoid production usage)</param>
-        public CheckpointClient(string url, string token, bool debugMode = false)
+        /// <param name="useSnakeCase">Force usage of legacy snake case format for properties</param>
+        public CheckpointClient(string url, string token, bool debugMode = false, bool useSnakeCase = false)
         {
             _debugMode = debugMode;
             if (!url.EndsWith("/"))
@@ -90,17 +91,7 @@ namespace Checkpoint.Crm.Client
         /// <inheritdoc />
         public AccountOperationList FindAccountOperations(AccountOperationFilter filter)
         {
-            var req = BuildRequest("account-operations", Method.GET, filter);
-
-            if (!string.IsNullOrEmpty(filter.PointOfSaleCode))
-                req.AddQueryParameter("point_of_sale__code", filter.PointOfSaleCode);
-
-            if (!string.IsNullOrEmpty(filter.ExternalId))
-                req.AddQueryParameter("external_id", filter.ExternalId);
-
-            if (filter.AccountId != null)
-                req.AddQueryParameter("account_id", filter.AccountId.Value.ToString());
-
+            var req = BuildRequest($"account-operations/{filter.AccountId}/", Method.GET);
             var res = ExecuteRequestInternal<AccountOperationList>(req);
             AssertOk(res);
             return res.Data;

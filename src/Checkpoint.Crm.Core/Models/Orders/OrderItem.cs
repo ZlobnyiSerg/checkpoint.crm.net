@@ -25,9 +25,9 @@ namespace Checkpoint.Crm.Core.Models.Orders
         public string Code { get; set; }
 
         /// <summary>
-        ///     Подкод оказанной услуги
+        ///     Код тарифной группы (тарифа)
         /// </summary>
-        public string SubCode { get; set; }
+        public string RateGroup { get; set; }
 
         /// <summary>
         ///     Наименование транзакции (услуги и т.п.)
