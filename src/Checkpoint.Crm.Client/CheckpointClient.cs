@@ -330,8 +330,6 @@ namespace Checkpoint.Crm.Client
 
             if (filter != null)
             {
-                if (filter.ModifiedSince != null)
-                    request.AddQueryParameter("date_modified__gt", filter.ModifiedSince.Value.ToString("YYYY-DD-MMTHH:mm:ss"));
                 if (filter.Limit != null)
                     request.AddQueryParameter("limit", filter.Limit.Value.ToString());
                 if (filter.Offset != null)

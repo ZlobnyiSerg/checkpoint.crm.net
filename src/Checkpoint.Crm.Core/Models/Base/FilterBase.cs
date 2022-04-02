@@ -8,11 +8,6 @@ namespace Checkpoint.Crm.Core.Models.Base
     public class FilterBase
     {
         /// <summary>
-        ///     Дата последней модификации
-        /// </summary>
-        public DateTime? ModifiedSince { get; set; }
-
-        /// <summary>
         ///     Размер ограничений записей
         /// </summary>
         public long? Limit { get; set; }
