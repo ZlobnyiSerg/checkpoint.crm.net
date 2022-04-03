@@ -25,7 +25,7 @@ namespace Checkpoint.Crm.Core.Models.Base
         /// <summary>
         ///     Внешний идентификатор
         /// </summary>
-        public string ExternalId { get; set; }
+        public string? ExternalId { get; set; }
         
         /// <summary>
         ///     Дата создания

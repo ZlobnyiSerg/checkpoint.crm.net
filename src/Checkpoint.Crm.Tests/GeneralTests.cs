@@ -12,7 +12,7 @@ namespace Checkpoint.Crm.Tests
     [TestFixture]
     public class GeneralTests
     {
-        private static string Url = "http://localhost:8000/api";
+        private static string Url = "http://localhost:5000/api/";
         private static string Token = "3c464b1077f311f6ab8c8850476aec0ff29b01c6";
 
         [Test]
@@ -24,11 +24,49 @@ namespace Checkpoint.Crm.Tests
             Assert.Greater(res.Count, 0);
         }
 
+        
+        [Test]
+        public void TestOrderCreate()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var order = new Order
+            {
+                Name = "Test Order",
+                DateStart = DateTime.Today,
+                Customer = new Customer
+                {
+                    FirstName = "Serg",
+                    LastName = "Zhi",
+                    Email = "test@gmail.com",
+                    Phone = "+79061112233"
+                },
+                ExtraFields = new []
+                {
+                    new OrderExtraField
+                    {
+                        Name = "SomeField",
+                        Value = "Value",
+                        BinaryData = new byte[] { 1, 2, 3}
+                    }
+                }
+            };
+            var res = cli.CreateUpdateOrder("MAIN", "123123", order);
+            var orderField = cli.GetOrderExtraField(res.Id, "SomeField");
+            
+            Assert.Greater(res.Id, 0);
+            Assert.IsNotEmpty(res.ExtraFields);
+            Assert.AreEqual(res.ExtraFields[0].Name, "SomeField");
+            Assert.AreEqual(res.ExtraFields[0].Value, "Value");
+            Assert.IsNull(res.ExtraFields[0].BinaryData);
+            Assert.NotNull(orderField);
+            Assert.IsNotEmpty(orderField.BinaryData);
+        }
+        
         [Test]
         public void TestOrderSearch()
         {
             var cli = new CheckpointClient(Url, Token);
-            var orders = cli.FindOrders(new OrderFilter());
+            var orders = cli.FindOrders(new OrderFilter { Limit = 10 });
             Assert.Greater(orders.Count, 0);
             Assert.IsNotNull(orders.Results);
             foreach (var order in orders.Results)
@@ -38,7 +76,16 @@ namespace Checkpoint.Crm.Tests
                 Assert.IsNotNull(ord);
             }
         }
-        
+
+        [Test]
+        public void TestPosSearch()
+        {
+            var cli = new CheckpointClient(Url, Token);
+            var pos = cli.FindPointOfSales(new PointOfSaleFilter());
+            Assert.Greater(pos.Count, 0);
+            Assert.IsNotNull(pos.Results);
+        }
+
         [Test]
         public void TestPricePrecision()
         {
@@ -52,13 +99,13 @@ namespace Checkpoint.Crm.Tests
                     ExternalId = "1",
                     DateStart = DateTime.Today,
                     DateEnd = null,
-                    Items = new []
+                    Items = new[]
                     {
                         new OrderItem
                         {
                             Date = DateTime.Today,
-                            Code="123",
-                            Name="Text",
+                            Code = "123",
+                            Name = "Text",
                             Amount = 10,
                             AmountBeforeDiscount = 10.123456m
                         }
@@ -83,9 +130,9 @@ namespace Checkpoint.Crm.Tests
         public void TestCustomerAndAccountOperations()
         {
             var cli = new CheckpointClient(Url, Token);
-            
+
             var order = new Order
-            {                                
+            {
                 ExternalId = Guid.NewGuid().ToString(),
                 DateStart = DateTime.Today.AddDays(-1),
                 DateEnd = DateTime.Today,
@@ -101,9 +148,9 @@ namespace Checkpoint.Crm.Tests
                     BirthDate = new DateTime(1981, 12, 11)
                 }
             };
-            
+
             order = cli.CreateUpdateOrder("MAIN", order.ExternalId, order);
-            
+
             var customers = cli.FindCustomers(new CustomerFilter());
             Assert.Greater(customers.Count, 0);
             var customer = cli.GetCustomer(customers.Results[0].Id);
@@ -113,7 +160,7 @@ namespace Checkpoint.Crm.Tests
             var pointOperation = cli.ChargePoints(new ChargePointsRequest("Points test", "MAIN", order.ExternalId, card.Account.Id, 10, "test user"));
             Assert.IsNotNull(pointOperation);
             Assert.Greater(pointOperation.Id, 0);
-            
+
             cli.ChargedPointsDelete(new DeleteAccountOperationRequest
             {
                 AccountOperationId = pointOperation.Id
@@ -121,14 +168,14 @@ namespace Checkpoint.Crm.Tests
 
             cli.DeleteOrder(order.Id);
         }
-        
+
         [Test]
         public void TestCustomerSearch()
         {
             var cli = new CheckpointClient(Url, Token);
             var customers = cli.FindCustomers(new CustomerFilter
             {
-                ExternalId = "1b057f36-5f15-4148-b907-54e9c1cccaf0"
+                Limit = 5
             });
             Assert.Greater(customers.Count, 1);
         }
@@ -145,7 +192,7 @@ namespace Checkpoint.Crm.Tests
             Assert.AreEqual(2, tc.Array[1]);
             Assert.AreEqual(3, tc.Array[2]);
         }
-        
+
         [Test]
         public void TestCardsList()
         {
@@ -157,7 +204,7 @@ namespace Checkpoint.Crm.Tests
             });
             Assert.Greater(cards.Count, 0);
         }
-        
+
         [Test]
         public void TestBonusCharge()
         {

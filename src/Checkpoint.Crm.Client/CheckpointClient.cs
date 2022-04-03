@@ -175,6 +175,8 @@ namespace Checkpoint.Crm.Client
         public Order CreateUpdateOrder(string pointOfSaleCode, string externalOrderId, Order order)
         {
             var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.POST);
+            order.PosCode ??= pointOfSaleCode;
+            order.ExternalId ??= externalOrderId;
             req.AddJsonBody(order);            
             var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);
