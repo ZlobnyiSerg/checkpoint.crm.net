@@ -165,7 +165,10 @@ namespace Checkpoint.Crm.Client
 
             if (filter.CustomerId != null)
                 req.AddQueryParameter("customer", filter.CustomerId.ToString());
-
+            
+            if (filter.ParentId != null)
+                req.AddQueryParameter("parent_id", filter.ParentId.ToString());
+            
             var res = ExecuteRequestInternal<OrderList>(req);
             AssertOk(res);
             return res.Data;
