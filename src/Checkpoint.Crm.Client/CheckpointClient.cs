@@ -184,10 +184,12 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public OrderExtraField GetOrderExtraField(int orderId, string fieldName)
+        public OrderExtraField? GetOrderExtraField(int orderId, string fieldName)
         {
             var req = BuildRequest($"orders/{orderId}/extra-fields/{HttpUtility.UrlEncode(fieldName)}/", Method.GET);
             var res = ExecuteRequestInternal<OrderExtraField>(req);
+            if (res.StatusCode == HttpStatusCode.NotFound)
+                return null;
             AssertOk(res);
             return res.Data;
         }

@@ -117,12 +117,12 @@ namespace Checkpoint.Crm.Core
         Order CreateUpdateOrder(string pointOfSaleCode, string externalOrderId, Order order);
 
         /// <summary>
-        /// Возвращает
+        /// Возвращает значение дополнительного поля заказа, либо null если такое поле не найдено.
         /// </summary>
         /// <param name="orderId"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        OrderExtraField GetOrderExtraField(int orderId, string fieldName);
+        OrderExtraField? GetOrderExtraField(int orderId, string fieldName);
 
         /// <summary>
         /// Удаляет заказ
