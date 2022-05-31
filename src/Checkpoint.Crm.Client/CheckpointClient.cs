@@ -41,6 +41,7 @@ namespace Checkpoint.Crm.Client
             _token = token;
             _restClient = new RestClient(url)
             {
+                ThrowOnDeserializationError = false,
                 ThrowOnAnyError = true
             };
             _serializer = new NewtonsoftJsonSerializer();
