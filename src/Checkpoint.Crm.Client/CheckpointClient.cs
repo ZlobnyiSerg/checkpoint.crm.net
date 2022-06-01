@@ -352,7 +352,7 @@ namespace Checkpoint.Crm.Client
             if (response.StatusCode == HttpStatusCode.BadRequest)
                 throw new LoyaltyValidationException("Bad request: " + response.Content);
             if (response.StatusCode == HttpStatusCode.NotFound)
-                throw new LoyaltyNotFoundException("Not found: " + response.ResponseUri);
+                throw new LoyaltyNotFoundException($"Not found: '{response.Request.Method} {response.ResponseUri}'");
             if (response.StatusCode == HttpStatusCode.InternalServerError)
                 throw new LoyaltyException("Internal server error: " + response.Content);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
