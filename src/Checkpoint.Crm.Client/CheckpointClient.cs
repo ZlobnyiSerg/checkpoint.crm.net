@@ -355,6 +355,10 @@ namespace Checkpoint.Crm.Client
                 throw new LoyaltyNotFoundException("Not found: " + response.ResponseUri);
             if (response.StatusCode == HttpStatusCode.InternalServerError)
                 throw new LoyaltyException("Internal server error: " + response.Content);
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new LoyaltyUnauthorizedException("Unauthorized. Check access token");
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+                throw new LoyaltyForbiddenException("Forbidden. User has no access to resource");
             if (response.ErrorException != null)
                 throw new LoyaltyException(response.ErrorException.Message, response.ErrorException);
         }
