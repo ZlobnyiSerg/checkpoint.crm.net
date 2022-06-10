@@ -1,4 +1,4 @@
-# checkpoint.crn.net
+# checkpoint.crm.net
 Checkpoint CRM .NET Client library
 
 Simple usage example:
