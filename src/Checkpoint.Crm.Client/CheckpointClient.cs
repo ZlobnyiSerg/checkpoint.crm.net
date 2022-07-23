@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Web;
@@ -11,6 +12,7 @@ using Checkpoint.Crm.Core.Models.Cards;
 using Checkpoint.Crm.Core.Models.Customers;
 using Checkpoint.Crm.Core.Models.Orders;
 using Checkpoint.Crm.Core.Models.Shared;
+using Common.Logging;
 using RestSharp;
 using RestRequest = RestSharp.RestRequest;
 
@@ -19,6 +21,8 @@ namespace Checkpoint.Crm.Client
     /// <inheritdoc />
     public class CheckpointClient : ILoyaltyService
     {
+        protected static readonly ILog Log = LogManager.GetLogger<CheckpointClient>();
+        
         private readonly string _baseUrl;
         private readonly string _token;
         private readonly RestClient _restClient;
@@ -370,7 +374,21 @@ namespace Checkpoint.Crm.Client
 
         protected virtual IRestResponse<T> ExecuteRequestInternal<T>(IRestRequest request) where T : new()
         {
-            return _restClient.Execute<T>(request);
+            try
+            {
+                var sw = new Stopwatch();
+                sw.Start();
+                Log.Debug($"Executing request: {request.Method} {request.Resource}...");
+                var result = _restClient.Execute<T>(request);
+                Log.Debug($"Finished in {sw.Elapsed}");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error executing request: {request.Method} {request.Resource}: {ex.Message}");
+                Log.Error(ex);
+                throw;
+            }
         }
 
         #endregion        
