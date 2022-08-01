@@ -29,6 +29,11 @@ namespace Checkpoint.Crm.Client
         private readonly bool _debugMode;
         private readonly NewtonsoftJsonSerializer _serializer;
 
+        static CheckpointClient()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        }
+
         /// <summary>
         /// Creates client service
         /// </summary>
@@ -50,7 +55,7 @@ namespace Checkpoint.Crm.Client
             };
             _serializer = new NewtonsoftJsonSerializer();
             _restClient.AddHandler("application/json", () => _serializer);
-            _restClient.AddHandler("text/json", () => _serializer);
+            _restClient.AddHandler("text/json", () => _serializer);            
         }
 
         /// <inheritdoc />
