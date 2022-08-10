@@ -11,6 +11,11 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         ///     Перечень доступных промо-предложений
         /// </summary>
-        public List<PromoOffer> Offers { get; set; }
+        public PromoOffer[] Offers { get; set; }
+        
+        /// <summary>
+        ///     Перечень доступных промо-предложений
+        /// </summary>
+        public PromoOffer[]? UnavailableOffers { get; set; }
     }
 }
