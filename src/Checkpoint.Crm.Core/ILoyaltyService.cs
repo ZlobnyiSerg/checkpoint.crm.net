@@ -79,7 +79,7 @@ namespace Checkpoint.Crm.Core
         /// </summary>
         /// <param name="pointOfSaleId"></param>
         /// <returns></returns>
-        PointOfSale GetPointOfSale(long pointOfSaleId);
+        PointOfSale GetPointOfSale(string pointOfSaleId);
 
         #endregion
 
@@ -98,7 +98,7 @@ namespace Checkpoint.Crm.Core
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        Order GetOrder(int orderId);
+        Order GetOrder(string orderId);
 
         /// <summary>
         ///     Осуществляет поиск по визитам гостей
@@ -122,12 +122,12 @@ namespace Checkpoint.Crm.Core
         /// <param name="orderId"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        OrderExtraField? GetOrderExtraField(int orderId, string fieldName);
+        OrderExtraField? GetOrderExtraField(string orderId, string fieldName);
 
         /// <summary>
         /// Удаляет заказ
         /// </summary>        
-        void DeleteOrder(int orderId);
+        void DeleteOrder(string orderId);
 
         #endregion
 
@@ -158,7 +158,7 @@ namespace Checkpoint.Crm.Core
         /// Возвращает клиента по идентификатору, либо null
         /// </summary>        
         /// <returns></returns>
-        Customer GetCustomer(int id);
+        Customer GetCustomer(string id);
 
         /// <summary>
         /// Возвращает клиента по внешнему идентификатору, либо null если не найден

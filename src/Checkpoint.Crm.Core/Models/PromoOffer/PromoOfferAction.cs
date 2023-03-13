@@ -5,7 +5,7 @@ namespace Checkpoint.Crm.Core.Models
     /// </summary>
     public class PromoOfferAction
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         
         /// <summary>
         /// Заметки

@@ -10,6 +10,6 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         /// Идентификатор аккаунта (счёта) бонусного счёта
         /// </summary>
-        public int? AccountId { get; set; }
+        public string? AccountId { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Checkpoint.Crm.Core.Models.Cards
         /// <summary>
         ///     Идентификатор
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///     Строковый идентификатор карты
@@ -22,7 +22,7 @@ namespace Checkpoint.Crm.Core.Models.Cards
         /// <summary>
         ///     Уровень карты (Id)
         /// </summary>
-        public int? CurrentTierId { get; set; }
+        public string? CurrentTierId { get; set; }
         
         /// <summary>
         ///     Уровень карты
@@ -32,7 +32,7 @@ namespace Checkpoint.Crm.Core.Models.Cards
         /// <summary>
         ///     Рассчётный уровень карты (Id)
         /// </summary>
-        public int? ExpectedTierId { get; set; }
+        public string? ExpectedTierId { get; set; }
         
         /// <summary>
         ///     Рассчётный уровень карты
@@ -52,7 +52,7 @@ namespace Checkpoint.Crm.Core.Models.Cards
         /// <summary>
         ///     Гость владелец карты
         /// </summary>
-        public int? CustomerId { get; set; }        
+        public string? CustomerId { get; set; }        
         
         /// <summary>
         ///     Счёт, к которому привязана карта

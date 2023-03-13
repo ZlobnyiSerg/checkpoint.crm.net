@@ -7,7 +7,7 @@ namespace Checkpoint.Crm.Core.Models.Base
         /// <summary>
         ///     Идентификатор
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         ///     Внутреннаяя дата создания в системе лояльности. Для указания внешней даты используйте <see cref="ExtDateCreated"/>.

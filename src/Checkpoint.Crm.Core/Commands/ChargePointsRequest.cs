@@ -10,7 +10,7 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         /// Идентификатор аккаунта (взаимозаменим с номером карты лояльности)
         /// </summary>
-        public int? AccountId { get; set; }
+        public string? AccountId { get; set; }
         
         /// <summary>
         /// Описание/наименование операции списания баллов
@@ -52,7 +52,7 @@ namespace Checkpoint.Crm.Core.Commands
             Name = name;
             PosCode = posCode;
             OrderExternalId = orderExternalId;            
-            AccountId = accountId;
+            AccountId = accountId?.ToString();
             Amount = amount;
             InitiatorUser = initiatorUser;
         }
@@ -76,9 +76,14 @@ namespace Checkpoint.Crm.Core.Commands
 
         public ChargePointsRequest(int? accountId, string name, decimal amount)
         {
-            AccountId = accountId;
+            AccountId = accountId?.ToString();
             Name = name;
             Amount = amount;
+        }
+
+        public ChargePointsRequest()
+        {
+
         }
     }
 }

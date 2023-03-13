@@ -10,11 +10,11 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         ///     Идентификатор гостя
         /// </summary>
-        public int? CustomerId { get; set; }
+        public string? CustomerId { get; set; }
     
         /// <summary>
         /// Идентификатор родительского заказа
         /// </summary>
-        public int? ParentId { get; set; }
+        public string? ParentId { get; set; }
     }
 }

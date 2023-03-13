@@ -19,7 +19,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         /// <summary>
         ///     Идентификатор клиента
         /// </summary>
-        public int? CustomerId { get; set; }
+        public string? CustomerId { get; set; }
         
         /// <summary>
         /// Уровень гостя, зафиксированный для данного заказа
@@ -29,12 +29,12 @@ namespace Checkpoint.Crm.Core.Models.Orders
         /// <summary>
         /// Идентификатор гостя, зафиксированный для данного заказа
         /// </summary>
-        public int? CustomerTierId { get; set; }
+        public string? CustomerTierId { get; set; }
         
         /// <summary>
         /// Идентификатор родительского заказа
         /// </summary>
-        public int? ParentId { get; set; }
+        public string? ParentId { get; set; }
 
         /// <summary>
         ///     Идентификатор карты лояльности, применённой к заказу
@@ -49,7 +49,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         /// <summary>
         ///     Точка продаж, где осуществлён заказ. Альтернативой данному полю является использование кода точки продаж <see cref="PosCode"/>
         /// </summary>
-        public int? PointOfSaleId { get; set; }
+        public string? PointOfSaleId { get; set; }
         
         /// <summary>
         ///     Код точки продажи. Может использоваться при операциях вставки/обновления для идентификации заказа по POS и <see cref="ExternalId"/>. Является альтернативой полю идентификатора точки <see cref="PointOfSaleId"/>

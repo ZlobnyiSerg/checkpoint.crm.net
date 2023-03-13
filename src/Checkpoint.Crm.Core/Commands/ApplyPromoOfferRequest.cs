@@ -19,7 +19,7 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         ///     Перечень идентификаторов промо-предложений, которые следует применить к визиту гостя
         /// </summary>
-        public int[] OfferIds { get; set; }
+        public string[] OfferIds { get; set; }
     }
     
     /// <summary>
@@ -92,7 +92,7 @@ namespace Checkpoint.Crm.Core.Commands
             /// </summary>
             public class PromoOfferResultModel
             {
-                public int Id { get; set; }
+                public string Id { get; set; }
 
                 /// <summary>
                 /// Код промо-предложения
@@ -137,7 +137,7 @@ namespace Checkpoint.Crm.Core.Commands
                 
                 public class PromoOfferActionResultModel
                 {
-                    public long Id { get; set; }
+                    public string Id { get; set; }
         
                     public string Notes { get; set; }
         
