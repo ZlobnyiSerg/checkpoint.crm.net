@@ -134,7 +134,7 @@ namespace Checkpoint.Crm.Client
         /// <inheritdoc />
         public PointOfSale CreateOrUpdatePos(PointOfSale request)
         {
-            var req = BuildRequest(string.IsNullOrEmpty(request.Id) || request.Id == "0" ? "point-of-sales" : $"point-of-sales/{request.Id}/", string.IsNullOrEmpty(request.Id) || request.Id == "0" ? Method.POST : Method.PUT);
+            var req = BuildRequest(!request.Id.IsNotEmptyId() ? "point-of-sales" : $"point-of-sales/{request.Id}/", !request.Id.IsNotEmptyId() ? Method.POST : Method.PUT);
             req.AddJsonBody(request);
             var res = ExecuteRequestInternal<PointOfSale>(req);
             AssertOk(res);
@@ -275,7 +275,7 @@ namespace Checkpoint.Crm.Client
         /// <inheritdoc />
         public Customer CreateUpdateCustomer(Customer customer)
         {
-            if (!string.IsNullOrEmpty(customer.Id) && customer.Id != "0")
+            if (customer.Id.IsNotEmptyId())
             {
                 var req = BuildRequest($"customers/{customer.Id}/", Method.PUT);
                 req.AddJsonBody(customer);

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckpointClient.cs" />
+    <Compile Include="ExtMethods.cs" />
     <Compile Include="Json\DateFormatter.cs" />
     <Compile Include="Json\CheckpointContractResolver.cs" />
     <Compile Include="Json\DecimalConverter.cs" />
