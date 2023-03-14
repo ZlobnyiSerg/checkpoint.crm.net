@@ -98,7 +98,7 @@ namespace Checkpoint.Crm.Core
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        Order GetOrder(string orderId);
+        Order GetOrder(int orderId);
 
         /// <summary>
         ///     Осуществляет поиск по визитам гостей

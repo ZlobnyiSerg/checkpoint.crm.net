@@ -72,7 +72,7 @@ namespace Checkpoint.Crm.Tests
             foreach (var order in orders.Results)
             {
                 Assert.Greater(order.Id, "0");
-                var ord = cli.GetOrder(order.Id);
+                var ord = cli.GetOrder(int.Parse(order.Id));
                 Assert.IsNotNull(ord);
             }
         }

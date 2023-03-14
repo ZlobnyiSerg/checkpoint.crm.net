@@ -151,7 +151,7 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public Order GetOrder(string orderId)
+        public Order GetOrder(int orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.GET);
             var res = ExecuteRequestInternal<Order>(req);
