@@ -53,7 +53,7 @@ namespace Checkpoint.Crm.Tests
             var res = cli.CreateUpdateOrder("MAIN", "123123", order);
             var orderField = cli.GetOrderExtraField(res.Id, "SomeField");
             
-            Assert.Greater(res.Id, 0);
+            Assert.Greater(res.Id, "0");
             Assert.IsNotEmpty(res.ExtraFields);
             Assert.AreEqual(res.ExtraFields[0].Name, "SomeField");
             Assert.AreEqual(res.ExtraFields[0].Value, "Value");
@@ -71,8 +71,8 @@ namespace Checkpoint.Crm.Tests
             Assert.IsNotNull(orders.Results);
             foreach (var order in orders.Results)
             {
-                Assert.Greater(order.Id, 0);
-                var ord = cli.GetOrder(order.Id);
+                Assert.Greater(order.Id, "0");
+                var ord = cli.GetOrder(int.Parse(order.Id));
                 Assert.IsNotNull(ord);
             }
         }
@@ -122,7 +122,7 @@ namespace Checkpoint.Crm.Tests
             Assert.Greater(tiers.Count, 0);
             foreach (var tier in tiers.Results)
             {
-                Assert.Greater(tier.Id, 0);
+                Assert.Greater(tier.Id, "0");
             }
         }
 
@@ -157,9 +157,9 @@ namespace Checkpoint.Crm.Tests
             Assert.IsNotNull(customer.Cards);
             Assert.Greater(customer.Cards.Length, 0);
             var card = customer.Cards[0];
-            var pointOperation = cli.ChargePoints(new ChargePointsRequest("Points test", "MAIN", order.ExternalId, card.Account.Id, 10, "test user"));
+            var pointOperation = cli.ChargePoints(new ChargePointsRequest("Points test", "MAIN", order.ExternalId, int.Parse(card.Account.Id), 10, "test user"));
             Assert.IsNotNull(pointOperation);
-            Assert.Greater(pointOperation.Id, 0);
+            Assert.Greater(pointOperation.Id, "0");
 
             cli.ChargedPointsDelete(new DeleteAccountOperationRequest
             {

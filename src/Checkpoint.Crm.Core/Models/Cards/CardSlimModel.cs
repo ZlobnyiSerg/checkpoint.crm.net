@@ -11,7 +11,7 @@ public class CardSlimModel
     /// <summary>
     /// ID
     /// </summary>
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     /// <summary>
     /// Card number
@@ -61,12 +61,12 @@ public class CardSlimModel
     /// <summary>
     /// Customer Id
     /// </summary>
-    public int? CustomerId { get; set; }
+    public string? CustomerId { get; set; }
 
     /// <summary>
     /// Current tier Id
     /// </summary>
-    public int? CurrentTierId { get; set; }
+    public string? CurrentTierId { get; set; }
 
     /// <summary>
     /// Code of current card tier
@@ -81,10 +81,10 @@ public class CardSlimModel
     /// <summary>
     /// Expected tier id
     /// </summary>
-    public int? ExpectedTierId { get; set; }
+    public string? ExpectedTierId { get; set; }
 
     /// <summary>
     /// Loyalty program Id
     /// </summary>
-    public int ProgramId { get; set; }
+    public string ProgramId { get; set; }
 }

@@ -8,9 +8,9 @@
         /// <summary>
         ///     Идентификатор профиля
         /// </summary>
-        public int PersonId { get; set; }
+        public string PersonId { get; set; }
 
-        public PersonCustomField(int personId, string name, string value) : base(name, value)
+        public PersonCustomField(string personId, string name, string value) : base(name, value)
         {
             PersonId = personId;
         }

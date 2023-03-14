@@ -7,7 +7,7 @@ namespace Checkpoint.Crm.Core.Models.Shared;
 /// </summary>
 public class ProgramModel
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     /// <summary>
     /// Name of program

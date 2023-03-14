@@ -7,7 +7,7 @@ namespace Checkpoint.Crm.Core.Models.Orders
         /// <summary>
         ///     Идентификатор заказа
         /// </summary>
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
         
         /// <summary>
         ///     Двоичные данные

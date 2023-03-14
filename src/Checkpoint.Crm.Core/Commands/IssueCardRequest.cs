@@ -13,12 +13,12 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         /// Customer identifier
         /// </summary>
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         
         /// <summary>
         /// Tier of issued card
         /// </summary>
-        public int TierId { get; set; }
+        public string TierId { get; set; }
         
         /// <summary>
         /// Card issuer 

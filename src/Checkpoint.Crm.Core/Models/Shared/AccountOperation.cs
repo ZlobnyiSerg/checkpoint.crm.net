@@ -11,12 +11,12 @@ namespace Checkpoint.Crm.Core.Models.Shared
         /// <summary>
         /// Точка продаж, начислившая или списавшая баллы
         /// </summary>
-        public int? PointOfSaleId { get; set; }
+        public string? PointOfSaleId { get; set; }
         
         /// <summary>
         /// Целевой счёт
         /// </summary>
-        public int AccountId { get; set; }
+        public string AccountId { get; set; }
         
         /// <summary>
         /// Название операции (информационное поле)
@@ -46,17 +46,17 @@ namespace Checkpoint.Crm.Core.Models.Shared
         /// <summary>
         /// Номер заказа, благодаря которому баллы начисляются или в котором списываются в качестве оплаты
         /// </summary>
-        public int? OrderId { get; set; }
+        public string? OrderId { get; set; }
         
         /// <summary>
         /// Номер правила вознаграждения, на основании которого баллы начислены
         /// </summary>
-        public int? RuleId { get; set; }
+        public string? RuleId { get; set; }
         
         /// <summary>
         /// Тип бонусных баллов
         /// </summary>
-        public int? BonusTypeId { get; set; }
+        public string? BonusTypeId { get; set; }
         
         /// <summary>
         /// Пользователь-инициатор

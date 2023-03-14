@@ -8,7 +8,7 @@ public class DeleteAccountOperationRequest
     /// <summary>
     /// Идентификатор операции
     /// </summary>
-    public int AccountOperationId { get; set; }
+    public string AccountOperationId { get; set; }
     
     /// <summary>
     /// Пользователь, иницировавший запрос

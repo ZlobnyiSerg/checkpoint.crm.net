@@ -15,7 +15,7 @@ namespace Checkpoint.Crm.Tests
                 a = 0.123456m
             });
             
-            Assert.AreEqual("{\"a\":0.12346}", res);
+            Assert.AreEqual("{\r\n  \"a\": 0.12346\r\n}", res);
         }
     }
 }

@@ -134,7 +134,7 @@ namespace Checkpoint.Crm.Client
         /// <inheritdoc />
         public PointOfSale CreateOrUpdatePos(PointOfSale request)
         {
-            var req = BuildRequest(request.Id == 0 ? "point-of-sales" : $"point-of-sales/{request.Id}/", request.Id == 0 ? Method.POST : Method.PUT);
+            var req = BuildRequest(!request.Id.IsNotEmptyId() ? "point-of-sales" : $"point-of-sales/{request.Id}/", !request.Id.IsNotEmptyId() ? Method.POST : Method.PUT);
             req.AddJsonBody(request);
             var res = ExecuteRequestInternal<PointOfSale>(req);
             AssertOk(res);
@@ -142,7 +142,7 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public PointOfSale GetPointOfSale(long pointOfSaleId)
+        public PointOfSale GetPointOfSale(string pointOfSaleId)
         {
             var req = BuildRequest($"point-of-sales/{pointOfSaleId}/", Method.GET);            
             var res = ExecuteRequestInternal<PointOfSale>(req);
@@ -197,7 +197,7 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public OrderExtraField? GetOrderExtraField(int orderId, string fieldName)
+        public OrderExtraField? GetOrderExtraField(string orderId, string fieldName)
         {
             var req = BuildRequest($"orders/{orderId}/extra-fields/{HttpUtility.UrlEncode(fieldName)}/", Method.GET);
             var res = ExecuteRequestInternal<OrderExtraField>(req);
@@ -208,7 +208,7 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public void DeleteOrder(int orderId)
+        public void DeleteOrder(string orderId)
         {
             var req = BuildRequest($"orders/{orderId}/", Method.DELETE);                        
             var res = ExecuteRequestInternal<Order>(req);
@@ -235,7 +235,7 @@ namespace Checkpoint.Crm.Client
             if (filter.IsActive != null)
                 req.AddQueryParameter("is_active", filter.IsActive.Value.ToString().ToLowerInvariant());
             if (filter.CustomerId != null)
-                req.AddQueryParameter("customer", filter.CustomerId.Value.ToString());
+                req.AddQueryParameter("customer", filter.CustomerId);
 
             var res = ExecuteRequestInternal<CardList>(req);
             AssertOk(res);
@@ -253,7 +253,7 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public Customer GetCustomer(int id)
+        public Customer GetCustomer(string id)
         {
             var req = BuildRequest($"customers/{id}/", Method.GET);
             var res = ExecuteRequestInternal<Customer>(req);
@@ -275,7 +275,7 @@ namespace Checkpoint.Crm.Client
         /// <inheritdoc />
         public Customer CreateUpdateCustomer(Customer customer)
         {
-            if (customer.Id != 0)
+            if (customer.Id.IsNotEmptyId())
             {
                 var req = BuildRequest($"customers/{customer.Id}/", Method.PUT);
                 req.AddJsonBody(customer);

@@ -10,7 +10,7 @@ namespace Checkpoint.Crm.Core.Models.Shared
         /// <summary>
         ///     Идентификатор гостя
         /// </summary>
-        public int PersonId { get; set; }
+        public string PersonId { get; set; }
 
         /// <summary>
         ///     Тип контактного телефона (домашний, рабочий и т.п.)

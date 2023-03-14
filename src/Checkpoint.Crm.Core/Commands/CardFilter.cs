@@ -20,6 +20,6 @@ namespace Checkpoint.Crm.Core.Commands
         /// <summary>
         ///     Идентификатор клиента, к которому привязана карта
         /// </summary>
-        public int? CustomerId { get; set; }
+        public string? CustomerId { get; set; }
     }
 }
