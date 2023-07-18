@@ -185,11 +185,12 @@ namespace Checkpoint.Crm.Client
         }
 
         /// <inheritdoc />
-        public Order CreateUpdateOrder(string pointOfSaleCode, string externalOrderId, Order order)
+        public Order CreateUpdateOrder(CreateUpdateOrderRequest createUpdateOrderRequest)
         {
-            var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(pointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(externalOrderId)}/", Method.POST);
-            order.PosCode ??= pointOfSaleCode;
-            order.ExternalId ??= externalOrderId;
+            var req = BuildRequest($"point-of-sales/{HttpUtility.UrlEncode(createUpdateOrderRequest.PointOfSaleCode)}/orders/eid/{HttpUtility.UrlEncode(createUpdateOrderRequest.ExternalOrderId)}/", Method.POST);
+            var order = createUpdateOrderRequest.Order;
+            order.PosCode ??= createUpdateOrderRequest.PointOfSaleCode;
+            order.ExternalId ??= createUpdateOrderRequest.ExternalOrderId;
             req.AddJsonBody(order);            
             var res = ExecuteRequestInternal<Order>(req);
             AssertOk(res);

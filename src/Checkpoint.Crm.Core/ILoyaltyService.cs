@@ -110,11 +110,9 @@ namespace Checkpoint.Crm.Core
         /// <summary>
         ///     Регистрирует факт визита гостя вместе со всей детализацией по услугам, оплатам и предпочтениям. Если заказ с указанным externalId уже есть, обновляет его. Если такого нет - создаёт новый. 
         /// </summary>
-        /// <param name="pointOfSaleCode">Код точки продаж</param>
-        /// <param name="externalOrderId">Внешний идентификатор заказа</param>
-        /// <param name="order"></param>
+        /// <param name="createUpdateOrderRequest">запрос на создание/изменение</param>
         /// <returns>Идентификтор визита</returns>        
-        Order CreateUpdateOrder(string pointOfSaleCode, string externalOrderId, Order order);
+        Order CreateUpdateOrder(CreateUpdateOrderRequest createUpdateOrderRequest);
 
         /// <summary>
         /// Возвращает значение дополнительного поля заказа, либо null если такое поле не найдено.

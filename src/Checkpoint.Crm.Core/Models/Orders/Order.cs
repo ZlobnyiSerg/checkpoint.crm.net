@@ -122,11 +122,6 @@ namespace Checkpoint.Crm.Core.Models.Orders
         ///     Статус заказа (гость уехал, визит изменениям не подлежит).        
         /// </summary>
         public OrderStatus Status { get; set; }
-
-        /// <summary>
-        ///     Пользователь, совершающего операцию с заказом
-        /// </summary>
-        public string InitiatorUser { get; set; }
     }
 
     public enum OrderStatus
