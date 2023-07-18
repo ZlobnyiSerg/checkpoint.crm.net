@@ -20,6 +20,11 @@ namespace Checkpoint.Crm.Core.Commands
         ///     Перечень идентификаторов промо-предложений, которые следует применить к визиту гостя
         /// </summary>
         public string[] OfferIds { get; set; }
+
+        /// <summary>
+        /// Пользователь, иницировавший запрос
+        /// </summary>
+        public string? InitiatorUser { get; set; }
     }
     
     /// <summary>

@@ -49,6 +49,7 @@
     <Compile Include="Commands\ApplyPromoOfferRequest.cs" />
     <Compile Include="Commands\CardFilter.cs" />
     <Compile Include="Commands\ChargePointsRequest.cs" />
+    <Compile Include="Commands\CreateUpdateOrderRequest.cs" />
     <Compile Include="Commands\CustomerFilter.cs" />
     <Compile Include="Commands\DeleteAccountOperationRequest.cs" />
     <Compile Include="Commands\GetApplicablePromoOffersRequest.cs" />

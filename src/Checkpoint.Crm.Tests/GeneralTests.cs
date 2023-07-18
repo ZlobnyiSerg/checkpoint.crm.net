@@ -50,7 +50,13 @@ namespace Checkpoint.Crm.Tests
                     }
                 }
             };
-            var res = cli.CreateUpdateOrder("MAIN", "123123", order);
+            var res = cli.CreateUpdateOrder(
+                new CreateUpdateOrderRequest
+                {
+                    PointOfSaleCode = "MAIN",
+                    ExternalOrderId = "123123",
+                    Order = order 
+                });
             var orderField = cli.GetOrderExtraField(res.Id, "SomeField");
             
             Assert.Greater(res.Id, "0");
@@ -149,7 +155,13 @@ namespace Checkpoint.Crm.Tests
                 }
             };
 
-            order = cli.CreateUpdateOrder("MAIN", order.ExternalId, order);
+            order = cli.CreateUpdateOrder(
+                new CreateUpdateOrderRequest
+                {
+                    PointOfSaleCode = "MAIN",
+                    ExternalOrderId = order.ExternalId,
+                    Order = order
+                });
 
             var customers = cli.FindCustomers(new CustomerFilter());
             Assert.Greater(customers.Count, 0);
