@@ -20,6 +20,11 @@ namespace Checkpoint.Crm.Core.Models.Orders
         public string RevenueType { get; set; }
 
         /// <summary>
+        ///     Тип транзакции от услуги/товара
+        /// </summary>
+        public string TransactionType { get; set; }
+
+        /// <summary>
         ///     Код оказанной услуги
         /// </summary>
         public string Code { get; set; }
